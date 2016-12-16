@@ -1,8 +1,6 @@
-﻿Build started 12/15/2016 3:10:00 PM.
-     1>Project "F:\Snake\Snake\Snake.vcxproj" on node 2 (Build target(s)).
-     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.Cpp.Platform.targets(64,5): error MSB8020: The build tools for v140 (Platform Toolset = 'v140') cannot be found. To build using the v140 build tools, please install v140 build tools.  Alternatively, you may upgrade to the current Visual Studio tools by selecting the Project menu or right-click the solution, and then selecting "Upgrade Solution...".
-     1>Done Building Project "F:\Snake\Snake\Snake.vcxproj" (Build target(s)) -- FAILED.
-
-Build FAILED.
-
-Time Elapsed 00:00:00.07
+﻿  stdafx.cpp
+  Snake.cpp
+c:\users\lonn\documents\visual studio 2015\projects\snake\snake\snake.cpp(88): error C3861: 'afisarejoc': identifier not found
+c:\users\lonn\documents\visual studio 2015\projects\snake\snake\snake.cpp(104): error C2065: 'GWL_HINSTANCE': undeclared identifier
+c:\users\lonn\documents\visual studio 2015\projects\snake\snake\snake.cpp(104): error C2660: 'CreateWindowExW': function does not take 11 arguments
+c:\users\lonn\documents\visual studio 2015\projects\snake\snake\snake.cpp(133): error C3861: 'afisarejoc': identifier not found

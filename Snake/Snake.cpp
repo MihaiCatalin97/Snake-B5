@@ -1,37 +1,36 @@
 #include "stdafx.h"
 #include "Snake.h"
 
-#define MAX_LOADSTRING 100
-#define			BUTTON_IDENTIFIER	1
-
 int nCmdShowG;
-HINSTANCE instanta_curenta;                                
+HINSTANCE Instanta_Curenta;                                
 WCHAR titlu_fereastra[] = L"                          Main Menu";                  
-WCHAR nume_clasa_fereastra[] = L"Fereastra_Principala";           
-HWND fereastra_meniu;
-HWND startsingleplayer, startdoubleplayer, scor, exitbutton;
+WCHAR Clasa_Meniu[] = L"Fereastra_Principala"; 
 
-ATOM                MyRegisterClass(HINSTANCE hInstance);
+//Ferestre
+HWND Fereastra_Meniu, Fereastra_Joc;
+
+//Butoane
+HWND Singleplayer_Button, Doubleplayer_Button, Scor_Button, Exit_Button;
+
+//Functii
+ATOM                Creare_Clasa_Fereastra(HINSTANCE hInstance);
 void                Initializare(HINSTANCE, int);
 LRESULT CALLBACK    Procesare_Comenzi_Fereastra(HWND, UINT, WPARAM, LPARAM);
-HWND Creare_Buton(WCHAR text_buton[], int x, int y, int inaltime, int latime);
-HWND fereastra_joc;
+HWND				Creare_Buton(WCHAR text_buton[], int x, int y, int inaltime, int latime, int cod_buton);
+HWND				Creare_Fereastra(WCHAR nume_clasa[], WCHAR titlu_fereastra[], int latime, int inaltime);
 
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
-	nCmdShowG = nCmdShow;
-    MyRegisterClass(hInstance);
+	Instanta_Curenta = hInstance;
+	nCmdShowG = nCmdShow; // pastrez mCmdShow pentru a putea afisa si alte ferestre (vezi Creare_Fereastra)
 
+    Creare_Clasa_Fereastra(hInstance); // creaza clasa ferestrei, cu proprietatile ei
 	Initializare(hInstance, nCmdShow);
 
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_SNAKE));
-
     MSG msg;
-
-    // Main message loop:
     while (GetMessage(&msg, nullptr, 0, 0))
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if (!TranslateAccelerator(msg.hwnd, LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_SNAKE)), &msg))
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
@@ -41,7 +40,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLi
     return (int) msg.wParam;
 }
 
-ATOM MyRegisterClass(HINSTANCE hInstance)
+ATOM Creare_Clasa_Fereastra(HINSTANCE hInstance) // adauga proprietati la fereastra de meniu
 {
     WNDCLASSEXW wcex;
 
@@ -54,91 +53,71 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hInstance      = hInstance;
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_SNAKE));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground  = CreateSolidBrush(RGB(255, 255, 255)); // coloreaza fereastra gri
+    wcex.hbrBackground  = CreateSolidBrush(RGB(200, 200, 200)); // coloreaza fereastra gri
     wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_SNAKE);
-    wcex.lpszClassName  = nume_clasa_fereastra;
-    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+    wcex.lpszClassName  = Clasa_Meniu; // numele clasei
+    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL)); //iconita ferestrei
 
     return RegisterClassExW(&wcex);
 }
 
 void Initializare(HINSTANCE hInstance, int nCmdShow)
 {
-   instanta_curenta = hInstance;
+   
+	Fereastra_Meniu = Creare_Fereastra(Clasa_Meniu, L"                          Main Menu",300,425);
+	SetMenu(Fereastra_Meniu, NULL); // elimina meniul de sus
 
-   RECT desktop;
+   Singleplayer_Button = Creare_Buton(L"Single Player", 75, 90, 50, 150,1);
+   Doubleplayer_Button = Creare_Buton(L"Double Player", 75, 160, 50, 150,2);
+   Scor_Button = Creare_Buton(L"Scor", 75, 230, 50, 150,3);
+   Exit_Button = Creare_Buton(L"Exit", 75, 300, 50, 150,4);
 
-   const HWND hDesktop = GetDesktopWindow();
-   GetWindowRect(hDesktop, &desktop);
-
-   fereastra_meniu = CreateWindow(nume_clasa_fereastra, titlu_fereastra, WS_SYSMENU,
-      desktop.right/2 - 150, desktop.bottom/2 - 200, 300, 400, nullptr, nullptr, hInstance, nullptr); // creeaza fereastra pe mijlocul ecranului
-   SetMenu(fereastra_meniu, NULL); // elimina meniul de sus
-
-   startsingleplayer = Creare_Buton(L"Single Player", 75, 60, 50, 150);
-
-   startdoubleplayer = Creare_Buton(L"Double Player", 75, 130, 50, 150);
-
-   scor = Creare_Buton(L"Scor", 75, 200, 50, 150);
-
-   exitbutton = Creare_Buton(L"Exit", 75, 270, 50, 150);
-
-   ShowWindow(fereastra_meniu, nCmdShow);
-   UpdateWindow(fereastra_meniu);
-   afisarejoc();
-}
-
-HWND Creare_Buton(WCHAR text_buton[], int x, int y, int inaltime, int latime)
-{
-	HWND button = CreateWindow(
-		L"BUTTON",  // Predefined class; Unicode assumed 
-		text_buton,      // Button text 
-		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
-		x,         // x position 
-		y,         // y position 
-		latime,        // Button width
-		inaltime,        // Button height
-		fereastra_meniu,     // Parent window
-		(HMENU)BUTTON_IDENTIFIER,
-		(HINSTANCE)GetWindowLong(fereastra_meniu, GWL_HINSTANCE),
-		NULL);      // Pointer not needed.
-
-	return button;
 }
 
 LRESULT CALLBACK Procesare_Comenzi_Fereastra(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
-    case WM_PAINT:
+    case WM_PAINT://coloreaza fereastra si scrie text in ea
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
 			WCHAR text[] =L"Snake!";
-			int iY = 20;
-				TextOut(hdc, 125, iY, text, 6);
+			SetBkColor(hdc, COLORREF RGB(200, 200, 200));//face fundalul textului gri
+			SetTextColor(hdc, RGB(51, 153, 255));// seteaza culoarea textului
+			SelectObject(hdc, (HFONT)CreateFont(40, 0, 0, 0, FW_BOLD, 0, 0, 0, 0, 0, 0, 100, 0, L"SYSTEM_FIXED_FONT"));
+
+			TextOut(hdc, 98, 20, text, 6); //98 pixeli la stanga, 20 sus, dimensiune de 6
 		
             EndPaint(hWnd, &ps);
         }
         break;
-	case WM_COMMAND:
+	case WM_COMMAND: // comanda de la butoane
 	{
 		switch (LOWORD(wParam))
 		{
-		case BUTTON_IDENTIFIER:
-		{
-			//Step 5: User click on the button
-			if (HIWORD(wParam) == BN_CLICKED)
+			case 1: // cod_buton, vezi functia Creare_Buton
 			{
-				afisarejoc();
+				Fereastra_Joc = Creare_Fereastra(Clasa_Meniu,L"Single Player",500,500); // cand fereastra primeste o comanda de la butonul cu codul 1, creaza alta fereastra
+				break;
 			}
-		}
-		break;
+			case 2: // apasare buton 2
+			{
+				break;
+			}
+			case 3: // apasare buton 3
+			{
+				break;
+			}
+			case 4: // apasare buton 4
+			{
+				break;
+			}
 		}
 	}
 	break;
     case WM_DESTROY:
-        PostQuitMessage(0);
+        PostQuitMessage(0); // cand apesi pe butonul de x se inchide totul
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
@@ -146,17 +125,37 @@ LRESULT CALLBACK Procesare_Comenzi_Fereastra(HWND hWnd, UINT message, WPARAM wPa
     return 0;
 }
 
-void afisarejoc()
+HWND Creare_Buton(WCHAR text_buton[], int x, int y, int inaltime, int latime, int cod_buton)
+{
+	HWND button = CreateWindow(
+		L"BUTTON",  // Clasa predefinita (nu trebuie sa creem noi una)
+		text_buton,      // Button text 
+		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
+		x,         // x position 
+		y,         // y position 
+		latime,        // Button width
+		inaltime,        // Button height
+		Fereastra_Meniu,     // Parent window
+		(HMENU)cod_buton, // codul de la Procesare_Comenzi_Fereastra
+		(HINSTANCE)GetWindowLong(Fereastra_Meniu, GWL_HINSTANCE),
+		NULL);      // Pointer not needed.
+
+	return button;
+}
+
+HWND Creare_Fereastra(WCHAR nume_clasa[], WCHAR titlu_fereastra[], int latime, int inaltime)
 {
 	RECT desktop;
-
 	const HWND hDesktop = GetDesktopWindow();
-	GetWindowRect(hDesktop, &desktop);
+	GetWindowRect(hDesktop, &desktop); //ia dimensiunile desktopului
 
-	fereastra_joc = CreateWindow(nume_clasa_fereastra, titlu_fereastra, WS_SYSMENU,
-		desktop.right / 2 - 150, desktop.bottom / 2 - 200, 300, 400, nullptr, nullptr, instanta_curenta, nullptr);
+	HWND fereastra = CreateWindow(nume_clasa, titlu_fereastra, WS_SYSMENU,
+		(desktop.right-latime) / 2, (desktop.bottom- inaltime) / 2, latime, inaltime, nullptr, nullptr, Instanta_Curenta, nullptr); 
+	// inaltime si latime fereastra si centrarea ferestrei - (desktop.right-latime)/2 si (desktop.bottom-inaltime)/2
 
-	ShowWindow(fereastra_joc, nCmdShowG);
-	UpdateWindow(fereastra_joc);
+	ShowWindow(fereastra, nCmdShowG);
+	UpdateWindow(fereastra);
+
+	return fereastra;
 }
   
