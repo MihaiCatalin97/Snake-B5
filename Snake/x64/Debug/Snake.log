@@ -1,6 +1,0 @@
-﻿  stdafx.cpp
-  Snake.cpp
-c:\users\lonn\documents\visual studio 2015\projects\snake\snake\snake.cpp(88): error C3861: 'afisarejoc': identifier not found
-c:\users\lonn\documents\visual studio 2015\projects\snake\snake\snake.cpp(104): error C2065: 'GWL_HINSTANCE': undeclared identifier
-c:\users\lonn\documents\visual studio 2015\projects\snake\snake\snake.cpp(104): error C2660: 'CreateWindowExW': function does not take 11 arguments
-c:\users\lonn\documents\visual studio 2015\projects\snake\snake\snake.cpp(133): error C3861: 'afisarejoc': identifier not found

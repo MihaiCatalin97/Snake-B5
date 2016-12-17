@@ -2,20 +2,31 @@
 #include "Snake.h"
 
 int nCmdShowG;
-HINSTANCE Instanta_Curenta;                                
-WCHAR titlu_fereastra[] = L"                          Main Menu";                  
-WCHAR Clasa_Meniu[] = L"Fereastra_Principala"; 
+HINSTANCE Instanta_Curenta;
+WCHAR titlu_fereastra[] = L" Main Menu";
+WCHAR Clasa_Meniu[] = L"Fereastra_Principala";
+WCHAR Clasa_Scor[] = L"Scor";
+WCHAR Clasa_SinglePlayer[] = L"SinglePlayer";
+WCHAR Clasa_DoublePlayer[] = L"DoublePlayer";
+
 
 //Ferestre
-HWND Fereastra_Meniu, Fereastra_Joc;
+HWND Fereastra_Meniu, Fereastra_Joc, FereastraScor , FereastraSinglePlayer, FereastraDoublePlayer;
 
 //Butoane
 HWND Singleplayer_Button, Doubleplayer_Button, Scor_Button, Exit_Button;
 
 //Functii
 ATOM                Creare_Clasa_Fereastra(HINSTANCE hInstance);
+ATOM                Creare_Clasa_FereastraScor(HINSTANCE hInstance);
+ATOM                Creare_Clasa_FereastraSinglePlayer(HINSTANCE hInstance); 
+ATOM                Creare_Clasa_FereastraDoublePlayer(HINSTANCE hInstance);
+
 void                Initializare(HINSTANCE, int);
 LRESULT CALLBACK    Procesare_Comenzi_Fereastra(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK    Procesare_Comenzi_FereastraScor(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK    Procesare_Comenzi_FereastraSinglePlayer(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK    Procesare_Comenzi_FereastraDoublePlayer(HWND, UINT, WPARAM, LPARAM);
 HWND				Creare_Buton(WCHAR text_buton[], int x, int y, int inaltime, int latime, int cod_buton);
 HWND				Creare_Fereastra(WCHAR nume_clasa[], WCHAR titlu_fereastra[], int latime, int inaltime);
 
@@ -23,107 +34,259 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLi
 {
 	Instanta_Curenta = hInstance;
 	nCmdShowG = nCmdShow; // pastrez mCmdShow pentru a putea afisa si alte ferestre (vezi Creare_Fereastra)
-
-    Creare_Clasa_Fereastra(hInstance); // creaza clasa ferestrei, cu proprietatile ei
+    Creare_Clasa_FereastraScor( hInstance); //creaza clasa ferestrei de scor , cu proprietatile ei
+	Creare_Clasa_Fereastra(hInstance); // creaza clasa ferestrei principale , cu proprietatile ei
+	Creare_Clasa_FereastraSinglePlayer(hInstance);// creaza clasa ferestrei pentru un singur jucator , cu proprietatile ei
+	Creare_Clasa_FereastraDoublePlayer(hInstance); // creaza clasa ferestrei pentru jocul impotriva altui snake , cu proprietatile ei
 	Initializare(hInstance, nCmdShow);
 
-    MSG msg;
-    while (GetMessage(&msg, nullptr, 0, 0))
-    {
-        if (!TranslateAccelerator(msg.hwnd, LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_SNAKE)), &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-    }
+	MSG msg;
+	while (GetMessage(&msg, nullptr, 0, 0))
+	{
+		if (!TranslateAccelerator(msg.hwnd, LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_SNAKE)), &msg))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+	}
 
-    return (int) msg.wParam;
+	return (int)msg.wParam;
 }
 
 ATOM Creare_Clasa_Fereastra(HINSTANCE hInstance) // adauga proprietati la fereastra de meniu
 {
-    WNDCLASSEXW wcex;
+	WNDCLASSEXW wcex;
 
-    wcex.cbSize = sizeof(WNDCLASSEX);
+	wcex.cbSize = sizeof(WNDCLASSEX);
 
-    wcex.style          = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc    = Procesare_Comenzi_Fereastra;
-    wcex.cbClsExtra     = 0;
-    wcex.cbWndExtra     = 0;
-    wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_SNAKE));
-    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground  = CreateSolidBrush(RGB(200, 200, 200)); // coloreaza fereastra gri
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_SNAKE);
-    wcex.lpszClassName  = Clasa_Meniu; // numele clasei
-    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL)); //iconita ferestrei
+	wcex.style = CS_HREDRAW | CS_VREDRAW;
+	wcex.lpfnWndProc = Procesare_Comenzi_Fereastra;
+	wcex.cbClsExtra = 0;
+	wcex.cbWndExtra = 0;
+	wcex.hInstance = hInstance;
+	wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_SNAKE));
+	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+	wcex.hbrBackground = CreateSolidBrush(RGB(200, 200, 200)); // coloreaza fereastra gri
+	wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_SNAKE);
+	wcex.lpszClassName = Clasa_Meniu; // numele clasei
+	wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL)); //iconita ferestrei
 
-    return RegisterClassExW(&wcex);
+	return RegisterClassExW(&wcex);
+}
+
+ATOM Creare_Clasa_FereastraScor(HINSTANCE hInstance) // adauga proprietati la fereastra de scor
+{
+	WNDCLASSEXW wcex;
+
+	wcex.cbSize = sizeof(WNDCLASSEX);
+
+	wcex.style = CS_HREDRAW | CS_VREDRAW;
+	wcex.lpfnWndProc = Procesare_Comenzi_FereastraScor;
+	wcex.cbClsExtra = 0;
+	wcex.cbWndExtra = 0;
+	wcex.hInstance = hInstance;
+	wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_SNAKE));
+	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+	wcex.hbrBackground = CreateSolidBrush(RGB(200, 200, 200)); // coloreaza fereastra gri
+	wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_SNAKE);
+	wcex.lpszClassName = Clasa_Scor; // numele clasei
+	wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL)); //iconita ferestrei
+
+	return RegisterClassExW(&wcex);
+}
+
+ATOM Creare_Clasa_FereastraSinglePlayer(HINSTANCE hInstance) // adauga proprietati la fereastra de joc pentru un singur jucator
+{
+	WNDCLASSEXW wcex;
+
+	wcex.cbSize = sizeof(WNDCLASSEX);
+
+	wcex.style = CS_HREDRAW | CS_VREDRAW;
+	wcex.lpfnWndProc = Procesare_Comenzi_FereastraSinglePlayer;
+	wcex.cbClsExtra = 0;
+	wcex.cbWndExtra = 0;
+	wcex.hInstance = hInstance;
+	wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_SNAKE));
+	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+	wcex.hbrBackground = CreateSolidBrush(RGB(200, 200, 200)); // coloreaza fereastra gri
+	wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_SNAKE);
+	wcex.lpszClassName = Clasa_SinglePlayer; // numele clasei
+	wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL)); //iconita ferestrei
+
+	return RegisterClassExW(&wcex);
+}
+
+ATOM Creare_Clasa_FereastraDoublePlayer(HINSTANCE hInstance) // adauga proprietati la fereastra de joc pentru jocul impotriva altui snake
+{
+	WNDCLASSEXW wcex;
+
+	wcex.cbSize = sizeof(WNDCLASSEX);
+
+	wcex.style = CS_HREDRAW | CS_VREDRAW;
+	wcex.lpfnWndProc = Procesare_Comenzi_FereastraDoublePlayer;
+	wcex.cbClsExtra = 0;
+	wcex.cbWndExtra = 0;
+	wcex.hInstance = hInstance;
+	wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_SNAKE));
+	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+	wcex.hbrBackground = CreateSolidBrush(RGB(200, 200, 200)); // coloreaza fereastra gri
+	wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_SNAKE);
+	wcex.lpszClassName = Clasa_DoublePlayer; // numele clasei
+	wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL)); //iconita ferestrei
+
+	return RegisterClassExW(&wcex);
 }
 
 void Initializare(HINSTANCE hInstance, int nCmdShow)
 {
-   
-	Fereastra_Meniu = Creare_Fereastra(Clasa_Meniu, L"                          Main Menu",300,425);
-	SetMenu(Fereastra_Meniu, NULL); // elimina meniul de sus
 
-   Singleplayer_Button = Creare_Buton(L"Single Player", 75, 90, 50, 150,1);
-   Doubleplayer_Button = Creare_Buton(L"Double Player", 75, 160, 50, 150,2);
-   Scor_Button = Creare_Buton(L"Scor", 75, 230, 50, 150,3);
-   Exit_Button = Creare_Buton(L"Exit", 75, 300, 50, 150,4);
+	
+	Fereastra_Meniu = Creare_Fereastra(Clasa_Meniu, L" Main Menu", 300, 425);
+    SetMenu(Fereastra_Meniu, NULL); // elimina meniul de sus
+    Singleplayer_Button = Creare_Buton(L"Single Player", 75, 90, 50, 150, 1);
+	Doubleplayer_Button = Creare_Buton(L"Double Player", 75, 160, 50, 150, 2);
+	Scor_Button = Creare_Buton(L"Scor", 75, 230, 50, 150, 3);
+	Exit_Button = Creare_Buton(L"Exit", 75, 300, 50, 150, 4);
 
+}
+
+LRESULT CALLBACK Procesare_Comenzi_FereastraScor(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_PAINT://coloreaza fereastra si scrie text in ea
+	{
+					  PAINTSTRUCT ps;
+					  HDC hdc = BeginPaint(hWnd, &ps);
+					  WCHAR text[] = L"Scor!";
+					  SetBkColor(hdc, COLORREF RGB(200, 200, 200));//face fundalul textului gri
+					  SetTextColor(hdc, RGB(51, 153, 255));// seteaza culoarea textului
+					  SelectObject(hdc, (HFONT)CreateFont(40, 0, 0, 0, FW_BOLD, 0, 0, 0, 0, 0, 0, 100, 0, L"SYSTEM_FIXED_FONT"));
+
+					  TextOut(hdc, 98, 20, text, 6); //98 pixeli la stanga, 20 sus, dimensiune de 6
+
+					  EndPaint(hWnd, &ps);
+	}
+		break;
+
+
+
+	case WM_DESTROY:
+		PostQuitMessage(0); // cand apesi pe butonul de x se inchide totul
+		break;
+	default:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
+	return 0;
+}
+
+LRESULT CALLBACK Procesare_Comenzi_FereastraSinglePlayer(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_PAINT://coloreaza fereastra 
+	{
+					  PAINTSTRUCT ps;
+					  HDC hdc = BeginPaint(hWnd, &ps);
+					  SetBkColor(hdc, COLORREF RGB(200, 200, 200));//face fundalul textului gri
+					  SelectObject(hdc, (HFONT)CreateFont(40, 0, 0, 0, FW_BOLD, 0, 0, 0, 0, 0, 0, 100, 0, L"SYSTEM_FIXED_FONT"));
+
+					
+
+					  EndPaint(hWnd, &ps);
+	}
+		break;
+
+
+
+	case WM_DESTROY:
+		PostQuitMessage(0); // cand apesi pe butonul de x se inchide totul
+		break;
+	default:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
+	return 0;
+}
+LRESULT CALLBACK Procesare_Comenzi_FereastraDoublePlayer(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_PAINT://coloreaza fereastra 
+	{
+					  PAINTSTRUCT ps;
+					  HDC hdc = BeginPaint(hWnd, &ps);
+					  SetBkColor(hdc, COLORREF RGB(200, 200, 200));//face fundalul textului gri
+					  SelectObject(hdc, (HFONT)CreateFont(40, 0, 0, 0, FW_BOLD, 0, 0, 0, 0, 0, 0, 100, 0, L"SYSTEM_FIXED_FONT"));
+
+					  
+
+					  EndPaint(hWnd, &ps);
+	}
+		break;
+
+
+
+	case WM_DESTROY:
+		PostQuitMessage(0); // cand apesi pe butonul de x se inchide totul
+		break;
+	default:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
+	return 0;
 }
 
 LRESULT CALLBACK Procesare_Comenzi_Fereastra(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    switch (message)
-    {
-    case WM_PAINT://coloreaza fereastra si scrie text in ea
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-			WCHAR text[] =L"Snake!";
-			SetBkColor(hdc, COLORREF RGB(200, 200, 200));//face fundalul textului gri
-			SetTextColor(hdc, RGB(51, 153, 255));// seteaza culoarea textului
-			SelectObject(hdc, (HFONT)CreateFont(40, 0, 0, 0, FW_BOLD, 0, 0, 0, 0, 0, 0, 100, 0, L"SYSTEM_FIXED_FONT"));
+	switch (message)
+	{
+	case WM_PAINT://coloreaza fereastra si scrie text in ea
+	{
+					  PAINTSTRUCT ps;
+					  HDC hdc = BeginPaint(hWnd, &ps);
+					  WCHAR text[] = L"Snake!";
+					  SetBkColor(hdc, COLORREF RGB(200, 200, 200));//face fundalul textului gri
+					  SetTextColor(hdc, RGB(51, 153, 255));// seteaza culoarea textului
+					  SelectObject(hdc, (HFONT)CreateFont(40, 0, 0, 0, FW_BOLD, 0, 0, 0, 0, 0, 0, 100, 0, L"SYSTEM_FIXED_FONT"));
 
-			TextOut(hdc, 98, 20, text, 6); //98 pixeli la stanga, 20 sus, dimensiune de 6
-		
-            EndPaint(hWnd, &ps);
-        }
-        break;
+					  TextOut(hdc, 98, 20, text, 6); //98 pixeli la stanga, 20 sus, dimensiune de 6
+
+					  EndPaint(hWnd, &ps);
+	}
+		break;
 	case WM_COMMAND: // comanda de la butoane
 	{
-		switch (LOWORD(wParam))
-		{
-			case 1: // cod_buton, vezi functia Creare_Buton
-			{
-				Fereastra_Joc = Creare_Fereastra(Clasa_Meniu,L"Single Player",500,500); // cand fereastra primeste o comanda de la butonul cu codul 1, creaza alta fereastra
-				break;
-			}
-			case 2: // apasare buton 2
-			{
-				break;
-			}
-			case 3: // apasare buton 3
-			{
-				break;
-			}
-			case 4: // apasare buton 4
-			{
-				break;
-			}
-		}
+						 switch (LOWORD(wParam))
+						 {
+						 case 1: // cod_buton, vezi functia Creare_Buton
+						 {
+									 FereastraSinglePlayer = Creare_Fereastra(Clasa_SinglePlayer, L"Single Player", 500, 500); // cand fereastra primeste o comanda de la butonul cu codul 1, creaza alta fereastra
+									 break;
+						 }
+						 case 2: // apasare buton 2
+						 {            FereastraDoublePlayer = Creare_Fereastra(Clasa_DoublePlayer, L"Double Player", 500, 500);
+									 break;
+						 }
+						 case 3: // apasare buton 3
+						 {            FereastraScor = Creare_Fereastra(Clasa_Scor, L"Scor", 300, 425);
+									 break;
+						 }
+						 case 4: // apasare buton 4
+						 {
+									 PostQuitMessage(0);
+						 }
+						 }
 	}
-	break;
-    case WM_DESTROY:
-        PostQuitMessage(0); // cand apesi pe butonul de x se inchide totul
-        break;
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    return 0;
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0); // cand apesi pe butonul de x se inchide totul
+		break;
+	default:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
+	return 0;
 }
+
+
 
 HWND Creare_Buton(WCHAR text_buton[], int x, int y, int inaltime, int latime, int cod_buton)
 {
@@ -150,7 +313,7 @@ HWND Creare_Fereastra(WCHAR nume_clasa[], WCHAR titlu_fereastra[], int latime, i
 	GetWindowRect(hDesktop, &desktop); //ia dimensiunile desktopului
 
 	HWND fereastra = CreateWindow(nume_clasa, titlu_fereastra, WS_SYSMENU,
-		(desktop.right-latime) / 2, (desktop.bottom- inaltime) / 2, latime, inaltime, nullptr, nullptr, Instanta_Curenta, nullptr); 
+		(desktop.right - latime) / 2, (desktop.bottom - inaltime) / 2, latime, inaltime, nullptr, nullptr, Instanta_Curenta, nullptr);
 	// inaltime si latime fereastra si centrarea ferestrei - (desktop.right-latime)/2 si (desktop.bottom-inaltime)/2
 
 	ShowWindow(fereastra, nCmdShowG);
@@ -158,4 +321,3 @@ HWND Creare_Fereastra(WCHAR nume_clasa[], WCHAR titlu_fereastra[], int latime, i
 
 	return fereastra;
 }
-  

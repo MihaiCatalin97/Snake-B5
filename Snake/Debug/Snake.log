@@ -1,2 +1,15 @@
-﻿  Snake.cpp
-  Snake.vcxproj -> C:\Users\Lonn\Documents\Visual Studio 2015\Projects\Snake\Debug\Snake.exe
+﻿Build started 17.12.2016 23:17:31.
+     1>Project "C:\Users\Razvan\Desktop\Snake\Snake\Snake.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\Snake.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Snake.cpp
+         Snake.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Razvan\Desktop\Snake\Debug\Snake.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Razvan\Desktop\Snake\Debug\Snake.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Razvan\Desktop\Snake\Debug\Snake.lib" /MACHINE:X86 Debug\Snake.res
+         Debug\Snake.obj
+         Debug\stdafx.obj
+         Snake.vcxproj -> C:\Users\Razvan\Desktop\Snake\Debug\Snake.exe
+     1>Done Building Project "C:\Users\Razvan\Desktop\Snake\Snake\Snake.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.71
