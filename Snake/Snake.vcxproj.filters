@@ -30,6 +30,15 @@
     <ClInclude Include="Snake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Meniu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Fereastra_Joc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Fereastra_Scor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -51,5 +60,25 @@
     <Image Include="Snake.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Images\snake_body.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Desktop\menu_button_bg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Desktop\snake_head.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Meniu.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fereastra_Joc.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fereastra_Scor.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

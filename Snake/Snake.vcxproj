@@ -51,6 +51,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAsManaged>true</CompileAsManaged>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -77,6 +82,15 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Fereastra_Joc.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Fereastra_Scor.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Meniu.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="stdafx.h" />
@@ -93,8 +107,31 @@
     <ResourceCompile Include="Snake.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\..\Desktop\menu_button_bg.png" />
+    <Image Include="..\..\..\..\..\Desktop\snake_head.png" />
+    <Image Include="Images\snake_body.png">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </Image>
     <Image Include="small.ico" />
     <Image Include="Snake.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Fereastra_Joc.resx">
+      <DependentUpon>Fereastra_Joc.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fereastra_Scor.resx">
+      <DependentUpon>Fereastra_Scor.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Meniu.resx">
+      <DependentUpon>Meniu.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
