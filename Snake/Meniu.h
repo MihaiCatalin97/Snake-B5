@@ -21,15 +21,9 @@ namespace Snake {
 		Meniu(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~Meniu()
 		{
 			if (components)
@@ -191,6 +185,8 @@ namespace Snake {
 	}
 	private: System::Void button_scor_Click(System::Object^  sender, System::EventArgs^  e) 
 	{
+		Citire_Scoruri();
+		Sortare_Scoruri();
 		Fereastra_Scor form;
 		form.ShowDialog();
 	}

@@ -1,0 +1,67 @@
+﻿Build started 12/21/2016 7:47:14 PM.
+     1>Project "C:\Users\Lonn\Documents\GitHub\Snake-B5\Snake\Snake.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         D:\Visual Studio 2013\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Release\Snake.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         D:\Visual Studio 2013\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\Snake.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Snake.cpp
+         Snake.cpp
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(7): error C2871: 'System' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(8): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(8): error C2871: 'ComponentModel' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(9): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(9): error C2871: 'Collections' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(10): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(10): error C2871: 'Forms' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(11): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(11): error C2871: 'Data' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(12): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(12): error C2871: 'Drawing' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(14): error C2059: syntax error : 'public'
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(14): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(15): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Joc.h(15): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(8): error C2871: 'System' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(9): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(9): error C2871: 'ComponentModel' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(10): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(10): error C2871: 'Collections' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(11): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(11): error C2871: 'Forms' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(12): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(12): error C2871: 'Data' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(13): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(13): error C2871: 'Drawing' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(15): error C2059: syntax error : 'public'
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(15): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(16): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\lonn\documents\github\snake-b5\snake\Fereastra_Scor.h(16): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(8): error C2871: 'System' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(9): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(9): error C2871: 'ComponentModel' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(10): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(10): error C2871: 'Collections' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(11): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(11): error C2871: 'Forms' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(12): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(12): error C2871: 'Data' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(13): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(13): error C2871: 'Drawing' : a namespace with this name does not exist
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(18): error C2059: syntax error : 'public'
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(18): error C2653: 'System' : is not a class or namespace name
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(19): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\lonn\documents\github\snake-b5\snake\Meniu.h(19): error C2447: '{' : missing function header (old-style formal list?)
+     1>Snake.cpp(30): error C2653: 'Application' : is not a class or namespace name
+     1>Snake.cpp(30): error C3861: 'EnableVisualStyles': identifier not found
+     1>Snake.cpp(31): error C2653: 'Application' : is not a class or namespace name
+     1>Snake.cpp(31): error C3861: 'SetCompatibleTextRenderingDefault': identifier not found
+     1>Snake.cpp(33): error C2065: 'Meniu' : undeclared identifier
+     1>Snake.cpp(33): error C2146: syntax error : missing ';' before identifier 'form'
+     1>Snake.cpp(33): error C2065: 'form' : undeclared identifier
+     1>Snake.cpp(34): error C2653: 'Application' : is not a class or namespace name
+     1>Snake.cpp(34): error C2065: 'form' : undeclared identifier
+     1>Snake.cpp(34): error C3861: 'Run': identifier not found
+     1>Done Building Project "C:\Users\Lonn\Documents\GitHub\Snake-B5\Snake\Snake.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.73

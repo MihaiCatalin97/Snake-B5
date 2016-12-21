@@ -1,8 +1,6 @@
-#pragma once
 #include "Snake.h"
 #include <sstream>
 #include <string>
-
 
 namespace Snake {
 
@@ -13,75 +11,45 @@ namespace Snake {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for Fereastra_Scor
-	/// </summary>
 	public ref class Fereastra_Scor : public System::Windows::Forms::Form
 	{
-	public:
-		Fereastra_Scor(void)
+		System::ComponentModel::Container ^components;
+		private: System::Windows::Forms::Label^  Titlu_Meniu;
+		private: System::Windows::Forms::Label^  nume1;
+		private: System::Windows::Forms::Label^  scor1;
+		private: System::Windows::Forms::Label^  nume2;
+		private: System::Windows::Forms::Label^  scor2;
+		private: System::Windows::Forms::Label^  nume9;
+		private: System::Windows::Forms::Label^  nume8;
+		private: System::Windows::Forms::Label^  nume7;
+		private: System::Windows::Forms::Label^  nume6;
+		private: System::Windows::Forms::Label^  nume5;
+		private: System::Windows::Forms::Label^  nume4;
+		private: System::Windows::Forms::Label^  nume3;
+		private: System::Windows::Forms::Label^  nume10;
+		private: System::Windows::Forms::Label^  scor10;
+		private: System::Windows::Forms::Label^  scor9;
+		private: System::Windows::Forms::Label^  scor8;
+		private: System::Windows::Forms::Label^  scor7;
+		private: System::Windows::Forms::Label^  scor6;
+		private: System::Windows::Forms::Label^  scor5;
+		private: System::Windows::Forms::Label^  scor4;
+		private: System::Windows::Forms::Label^  scor3;
+	
+		public: Fereastra_Scor(void)
 		{
 			InitializeComponent();
 			AfisareScore();
-
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
-	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		~Fereastra_Scor()
+		protected:~Fereastra_Scor()
 		{
 			if (components)
 			{
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^  Titlu_Meniu;
-	private: System::Windows::Forms::Label^  nume1;
-	private: System::Windows::Forms::Label^  scor1;
-	private: System::Windows::Forms::Label^  nume2;
-	private: System::Windows::Forms::Label^  scor2;
-	private: System::Windows::Forms::Label^  nume9;
 
-	private: System::Windows::Forms::Label^  nume8;
-
-	private: System::Windows::Forms::Label^  nume7;
-
-	private: System::Windows::Forms::Label^  nume6;
-	private: System::Windows::Forms::Label^  nume5;
-	private: System::Windows::Forms::Label^  nume4;
-	private: System::Windows::Forms::Label^  nume3;
-	private: System::Windows::Forms::Label^  nume10;
-	private: System::Windows::Forms::Label^  scor10;
-
-	private: System::Windows::Forms::Label^  scor9;
-
-	private: System::Windows::Forms::Label^  scor8;
-
-	private: System::Windows::Forms::Label^  scor7;
-
-	private: System::Windows::Forms::Label^  scor6;
-	private: System::Windows::Forms::Label^  scor5;
-	private: System::Windows::Forms::Label^  scor4;
-	private: System::Windows::Forms::Label^  scor3;
-
-	protected:
-
-	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		System::ComponentModel::Container ^components;
-
-#pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
 		void InitializeComponent(void)
 		{
 			this->Titlu_Meniu = (gcnew System::Windows::Forms::Label());
@@ -121,7 +89,6 @@ namespace Snake {
 			this->Titlu_Meniu->Tag = L"";
 			this->Titlu_Meniu->Text = L"Scor:";
 			this->Titlu_Meniu->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			this->Titlu_Meniu->Click += gcnew System::EventHandler(this, &Fereastra_Scor::Titlu_Meniu_Click);
 			// 
 			// nume1
 			// 
@@ -399,7 +366,6 @@ namespace Snake {
 			this->PerformLayout();
 
 		}
-#pragma endregion
 
 		void AfisareScore()
 		{
@@ -433,11 +399,6 @@ namespace Snake {
 			this->nume10->Text = gcnew String(Scoruri[9].Nume.c_str());
 			this->scor10->Text = gcnew String((std::to_string(Scoruri[9].Scor).c_str()));
 		}
-	
-  
-
-private: System::Void Titlu_Meniu_Click(System::Object^  sender, System::EventArgs^  e) {
-}
 };
 }
   
