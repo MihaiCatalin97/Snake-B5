@@ -174,14 +174,14 @@ namespace Snake {
 #pragma endregion
 	private: System::Void button_singleplayer_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		Fereastra_Joc form;
-		form.ShowDialog();
+				 Fereastra_Joc^ form = gcnew Fereastra_Joc(0);
+				 form->ShowDialog();
 	}
 
 	private: System::Void button_double_player_Click(System::Object^  sender, System::EventArgs^  e) 
 	{
-		Fereastra_Joc form;
-		form.ShowDialog();
+				 Fereastra_Joc^ form = gcnew Fereastra_Joc(1);
+				 form->ShowDialog();
 	}
 	private: System::Void button_scor_Click(System::Object^  sender, System::EventArgs^  e) 
 	{
