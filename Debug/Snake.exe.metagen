@@ -22,8 +22,8 @@ Class Snake.Fereastra_Joc: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   Methods:
     Creare_Sarpe_Initial(): PrivateScope, Public, HideBySig
     InitializeComponent(): PrivateScope, Public, HideBySig
-    Miscare_Sarpe(): PrivateScope, Public, HideBySig
-    Verifica_Coliziune(): PrivateScope, Public, HideBySig
+    Miscare_Sarpe(PictureBox[], Int32, Int32): PrivateScope, Public, HideBySig
+    Verifica_Coliziune(PictureBox[], Int32): PrivateScope, Public, HideBySig
     timer1_Tick(Object, EventArgs): PrivateScope, Public, HideBySig
     Fereastra_Joc_KeyPress(Object, KeyPressEventArgs): PrivateScope, Public, HideBySig
     Crestere_Dimensiune(): PrivateScope, Public, HideBySig

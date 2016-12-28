@@ -1,5 +1,5 @@
-﻿Build started 12/21/2016 9:46:17 PM.
-     1>Project "c:\Users\Lonn\Documents\GitHub\Snake-B5\Snake\Snake.vcxproj" on node 2 (Build target(s)).
+﻿Build started 12/28/2016 5:30:50 PM.
+     1>Project "C:\Users\Lonn\Documents\GitHub\Snake-B5\Snake\Snake.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          D:\Visual Studio 2013\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\Snake.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib Snake.cpp
          Snake.cpp
@@ -9,8 +9,8 @@
          Debug\stdafx.obj
          "Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
          Snake.vcxproj -> C:\Users\Lonn\Documents\GitHub\Snake-B5\Debug\Snake.exe
-     1>Done Building Project "c:\Users\Lonn\Documents\GitHub\Snake-B5\Snake\Snake.vcxproj" (Build target(s)).
+     1>Done Building Project "C:\Users\Lonn\Documents\GitHub\Snake-B5\Snake\Snake.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.39
+Time Elapsed 00:00:01.96

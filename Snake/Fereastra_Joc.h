@@ -13,15 +13,16 @@ namespace Snake {
 
 	public ref class Fereastra_Joc : public System::Windows::Forms::Form
 	{
-		private: static array<PictureBox^>^ pictures;	
+		private: static array<PictureBox^>^ sarpe1;
+		
 		System::ComponentModel::ComponentResourceManager^  resourcesx;
 
 		bool crescut = false;
 
 		Timer^ TimerID;
 		int x=0;
-		int dimensiune_sarpe = 2;
-		int direction = 0;
+		int dimensiune_sarpe1 = 2;
+		int directie1 = 0;
 
 		System::Windows::Forms::Label^  label_Nume;
 		System::Windows::Forms::Label^  label_Scor;
@@ -29,7 +30,7 @@ namespace Snake {
 
 		public: Fereastra_Joc(void)
 		{
-			pictures = (gcnew array<System::Windows::Forms::PictureBox^>(100));
+			sarpe1 = (gcnew array<System::Windows::Forms::PictureBox^>(100));
 
 			TimerID = gcnew System::Windows::Forms::Timer();
 			TimerID->Tick += gcnew System::EventHandler(this, &Fereastra_Joc::timer1_Tick);
@@ -49,26 +50,26 @@ namespace Snake {
 
 		void Creare_Sarpe_Initial()
 		{
-			this->pictures[0] = (gcnew System::Windows::Forms::PictureBox());
-			this->pictures[1] = (gcnew System::Windows::Forms::PictureBox());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictures[0]))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictures[1]))->BeginInit();
+			this->sarpe1[0] = (gcnew System::Windows::Forms::PictureBox());
+			this->sarpe1[1] = (gcnew System::Windows::Forms::PictureBox());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->sarpe1[0]))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->sarpe1[1]))->BeginInit();
 
-			this->pictures[0]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"Snake_Head.BackgroundImage")));
-			this->pictures[0]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			this->pictures[0]->Location = System::Drawing::Point(100, 125);
-			this->pictures[0]->Size = System::Drawing::Size(50, 50);
+			this->sarpe1[0]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"Snake_Head.BackgroundImage")));
+			this->sarpe1[0]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+			this->sarpe1[0]->Location = System::Drawing::Point(100, 125);
+			this->sarpe1[0]->Size = System::Drawing::Size(50, 50);
 
-			this->pictures[1]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"Snake_Body1.BackgroundImage")));
-			this->pictures[1]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			this->pictures[1]->Location = System::Drawing::Point(100, 75);
-			this->pictures[1]->Size = System::Drawing::Size(50, 50);
+			this->sarpe1[1]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"Snake_Body1.BackgroundImage")));
+			this->sarpe1[1]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+			this->sarpe1[1]->Location = System::Drawing::Point(100, 75);
+			this->sarpe1[1]->Size = System::Drawing::Size(50, 50);
 
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictures[0]))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictures[1]))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->sarpe1[0]))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->sarpe1[1]))->EndInit();
 
-			this->Controls->Add(this->pictures[1]);
-			this->Controls->Add(this->pictures[0]);
+			this->Controls->Add(this->sarpe1[1]);
+			this->Controls->Add(this->sarpe1[0]);
 		}
 
 		void InitializeComponent(void)
@@ -112,20 +113,20 @@ namespace Snake {
 			this->ResumeLayout(false);
 		}
 
-		void Miscare_Sarpe()
+		void Miscare_Sarpe(array<PictureBox^>^ bucati_sarpe, int dimensiune,int directie)
 		{
 			//muta toate segmentele inafara capului, 
 			//astfel ultimul segment ajunge in locul penultimului si primul in locul capului
-			for (int i = dimensiune_sarpe - 1 - crescut; i>0; i--)
+			for (int i = dimensiune - 1 - crescut; i>0; i--)
 			{
-				pictures[i]->Location = pictures[i - 1]->Location;
+				bucati_sarpe[i]->Location = bucati_sarpe[i - 1]->Location;
 			}
 			crescut = false;
 
 			//calculeaza noua pozitie a capului in functie de directie
-			Point Next_Location = this->pictures[0]->Location;
+			Point Next_Location = bucati_sarpe[0]->Location;
 			
-			switch (direction)
+			switch (directie)
 			{
 				case 0:
 				{
@@ -161,9 +162,9 @@ namespace Snake {
 			if (Next_Location.Y >= 575)
 				Next_Location.Y = 75;
 
-			this->pictures[0]->Location = System::Drawing::Point(Next_Location);
+			bucati_sarpe[0]->Location = System::Drawing::Point(Next_Location);
 
-			if (Verifica_Coliziune())
+			if (Verifica_Coliziune(bucati_sarpe,dimensiune))
 			{
 				End_Game();
 				this->Close();
@@ -171,17 +172,17 @@ namespace Snake {
 				
 		}
 
-		bool Verifica_Coliziune()
+		bool Verifica_Coliziune(array<PictureBox^>^ bucati_sarpe, int dimensiune)
 		{
-			for (int i = 1; i < dimensiune_sarpe;i++)
-				if (pictures[i]->Location == pictures[0]->Location)
+			for (int i = 1; i < dimensiune; i++)
+				if (bucati_sarpe[i]->Location == bucati_sarpe[0]->Location)
 					return true;
 			return false;
 		}
 
 		void Fereastra_Joc::timer1_Tick(System::Object^  sender, System::EventArgs^  e)
 		{
-			Miscare_Sarpe();
+			Miscare_Sarpe(sarpe1,dimensiune_sarpe1,directie1);
 
 			if (x == 4)
 			{
@@ -196,27 +197,27 @@ namespace Snake {
 		{
 			//detecteaza apasarea de taste
 			if (e->KeyChar == 'W' || e->KeyChar == 'w')
-				direction = 1;
+				directie1 = 1;
 			else if (e->KeyChar == 'D' || e->KeyChar == 'd')
-				direction = 2;
+				directie1 = 2;
 			else if (e->KeyChar == 'A' || e->KeyChar == 'a')
-				direction = 0;
+				directie1 = 0;
 			else if (e->KeyChar == 'S' || e->KeyChar == 's')
-				direction = 3;
+				directie1 = 3;
 		}
 
 		void Crestere_Dimensiune()
 		{
 			//creare segment nou sarpe
-			this->pictures[dimensiune_sarpe] = (gcnew System::Windows::Forms::PictureBox());
-			this->pictures[dimensiune_sarpe]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"Snake_Body1.BackgroundImage")));
-			this->pictures[dimensiune_sarpe]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			this->pictures[dimensiune_sarpe]->Location = this->pictures[dimensiune_sarpe-1]->Location;
-			this->pictures[dimensiune_sarpe]->Size = System::Drawing::Size(50, 50);
-			this->Controls->Add(this->pictures[dimensiune_sarpe]);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictures[dimensiune_sarpe]))->EndInit();
+			this->sarpe1[dimensiune_sarpe1] = (gcnew System::Windows::Forms::PictureBox());
+			this->sarpe1[dimensiune_sarpe1]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"Snake_Body1.BackgroundImage")));
+			this->sarpe1[dimensiune_sarpe1]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+			this->sarpe1[dimensiune_sarpe1]->Location = this->sarpe1[dimensiune_sarpe1-1]->Location;
+			this->sarpe1[dimensiune_sarpe1]->Size = System::Drawing::Size(50, 50);
+			this->Controls->Add(this->sarpe1[dimensiune_sarpe1]);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->sarpe1[dimensiune_sarpe1]))->EndInit();
 
-			dimensiune_sarpe++;
+			dimensiune_sarpe1++;
 			Scor += 1;
 			this->label_Scor->Text = L"Scor: " + Scor;
 			crescut = true; //cand sarpele a crescut ultimul segment nu se misca (cel nou adaugat)
