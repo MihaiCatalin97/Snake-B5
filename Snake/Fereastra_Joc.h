@@ -20,7 +20,7 @@ namespace Snake {
 			 System::ComponentModel::ComponentResourceManager^  resourcesx;
 
 			 PictureBox^ Mancare;
-			 int game_mode, dimensiune_sarpe2 = 2, directie2 = 0,dimensiune_sarpe1 = 2, directie1 = 0;
+			 int game_mode, dimensiune_sarpe2 = 2, directie2 = 0,dimensiune_sarpe1 = 2, directie1 = 0, ultima_directie1=0,ultima_directie2=0;
 			 Timer^ TimerID;
 
 			 System::Windows::Forms::Label^  label_Nume;
@@ -35,6 +35,7 @@ namespace Snake {
 				 int i = (sarpe2[0]->Location.Y - 75) / 50;
 				 int j = (sarpe2[0]->Location.X) / 50;
 				 bool adaugat = false;
+				 Mutare_Urmatoare = -1;
 
 					 if (Destinatie_I != i)
 					 {
@@ -42,33 +43,28 @@ namespace Snake {
 						 {
 							 Mutare_Urmatoare = 3;
 							 adaugat = true;
-							 i++;
 						 }
 
-						 else if (Destinatie_I - i >= (min(i, Destinatie_I) + 10 - max(i, Destinatie_I))*(Destinatie_I<i ? -1 : 1) && matrice_ocupare[i][((i - 1) >= 0 ? i - 1 : 9)] != 1)
+						 else if (Destinatie_I - i >= (min(i, Destinatie_I) + 10 - max(i, Destinatie_I))*(Destinatie_I<i ? -1 : 1) && matrice_ocupare[j][((i - 1) >= 0 ? i - 1 : 9)] != 1)
 						 {
 							 Mutare_Urmatoare = 1;
 							 adaugat = true;
-							 i--;
 						 }
-
 					 }
-					 if (Destinatie_J != j)
+
+					 if (Destinatie_J != j && !adaugat)
 					 {
 						 if (Destinatie_J - j < (min(j, Destinatie_J) + 10 - max(j, Destinatie_J))*(Destinatie_J<j ? -1 : 1) && matrice_ocupare[((j + 1)<10 ? j + 1 : 0)][i] != 1)
 						 {
 							 Mutare_Urmatoare = 2;
 							 adaugat = true;
-							 j++;
 						 }
 
 						 else if (Destinatie_J - j >= (min(j, Destinatie_J) + 10 - max(j, Destinatie_J))*(Destinatie_J<j ? -1 : 1) && matrice_ocupare[(j - 1) >= 0 ? j - 1 : 9][i] != 1)
 						 {
 							 Mutare_Urmatoare = 0;
 							 adaugat = true;
-							 j--;
 						 }
-
 					 }
 
 					 if (!adaugat)
@@ -79,39 +75,40 @@ namespace Snake {
 							 {
 								 Mutare_Urmatoare = 3;
 								 adaugat = true;
-								 i++;
 							 }
-
-							 else if (matrice_ocupare[i][((i - 1) >= 0 ? i - 1 : 9)] != 1)
+							 else if (matrice_ocupare[j][((i - 1) >= 0 ? i - 1 : 9)] != 1)
 							 {
 								 Mutare_Urmatoare = 1;
 								 adaugat = true;
-								 i--;
 							 }
 
 						 }
-						 if (Destinatie_J != j)
+						 if (Destinatie_J != j && !adaugat)
 						 {
 							 if (matrice_ocupare[((j + 1)<10 ? j + 1 : 0)][i] != 1)
 							 {
 								 Mutare_Urmatoare = 2;
 								 adaugat = true;
-								 j++;
 							 }
 
 							 else if (matrice_ocupare[(j - 1) >= 0 ? j - 1 : 9][i] != 1)
 							 {
 								 Mutare_Urmatoare = 0;
 								 adaugat = true;
-								 j--;
 							 }
 						 }
 					 }
+					 
+					 if (!adaugat)
+						 ;//
 
 			 }
 
 			 void Initializare_Custom()
 			 {
+				 Scor1 = 0;
+				 Scor2 = 0;
+
 				 System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Fereastra_Joc::typeid));
 				 resourcesx = resources;
 
@@ -123,6 +120,9 @@ namespace Snake {
 					 sarpe2 = (gcnew array<System::Windows::Forms::PictureBox^>(100));
 					 Creare_Sarpe(sarpe2);
 				 }
+
+				 if (game_mode == 2)
+					 Nume2 = "Optimus Prime";
 					 
 				 for (int i = 0; i<10; i++)
 					for (int j = 0; j<10; j++)
@@ -147,6 +147,7 @@ namespace Snake {
 				 this->Controls->Add(Mancare);
 				 this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &Fereastra_Joc::Joc_Closing);
 
+				 Refresh_Score();
 				 plaseaza_Mancare();
 			 }
 
@@ -266,8 +267,14 @@ namespace Snake {
 
 			void Refresh_Score()
 			{
-				this->label_Nume->Text = L"Nume: " + gcnew String(Nume.c_str());
-				this->label_Scor->Text = L"Scor: " + Scor;
+				this->label_Nume->Text = L"Nume: " + gcnew String(Nume1.c_str());
+				this->label_Scor->Text = L"Scor: " + Scor1;
+
+				if (game_mode > 0)
+				{
+					this->label_Nume->Text += "\n" + L"Nume: " + gcnew String(Nume2.c_str());
+					this->label_Scor->Text += "\n" + L"Scor: " + Scor2;
+				}
 			}
 
 			void Miscare_Sarpe(array<PictureBox^>^ bucati_sarpe, int dimensiune, int directie)
@@ -329,16 +336,18 @@ namespace Snake {
 					End_Game();
 					//this->Close();
 				}
-
-				if (matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] == 2)
+				else
 				{
-					Crestere_Dimensiune(bucati_sarpe, dimensiune);
-					Refresh_Score();
-					plaseaza_Mancare();
-				}
+					if (matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] == 2)
+					{
+						Crestere_Dimensiune(bucati_sarpe, dimensiune);
+						Refresh_Score();
+						plaseaza_Mancare();
+					}
 
-				bucati_sarpe[0]->Location = System::Drawing::Point(Next_Location);
-				matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] = 1;
+					bucati_sarpe[0]->Location = System::Drawing::Point(Next_Location);
+					matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] = 1;
+				}
 			}
 
 			void Fereastra_Joc::timer1_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -346,14 +355,19 @@ namespace Snake {
 				if (game_mode == 2)
 				{
 					Miscare_Sarpe(sarpe1, dimensiune_sarpe1, directie1);
+					ultima_directie1 = directie1;
 					Mutare_Computer();
 				}
 				else
 				{
 					Miscare_Sarpe(sarpe1, dimensiune_sarpe1, directie1);
+					ultima_directie1 = directie1;
 					
-					if (game_mode==1)
+					if (game_mode == 1)
+					{
 						Miscare_Sarpe(sarpe2, dimensiune_sarpe2, directie2);
+						ultima_directie2 = directie2;
+					}	
 				}
 			}
 
@@ -366,30 +380,28 @@ namespace Snake {
 			void Fereastra_Joc_KeyPress(Object^ sender, KeyPressEventArgs^ e) // se apeleaza la apasare de tasta
 			{
 				//detecteaza apasarea de taste
-				if (e->KeyChar == 'W' || e->KeyChar == 'w' && directie1 != 3)
+				if (e->KeyChar == 'W' || e->KeyChar == 'w' && ultima_directie1 != 3)
 					directie1 = 1;
-				else if (e->KeyChar == 'D' || e->KeyChar == 'd' && directie1 != 0)
+				else if (e->KeyChar == 'D' || e->KeyChar == 'd' && ultima_directie1 != 0)
 					directie1 = 2;
-				else if (e->KeyChar == 'A' || e->KeyChar == 'a' && directie1 != 2)
+				else if (e->KeyChar == 'A' || e->KeyChar == 'a' && ultima_directie1 != 2)
 					directie1 = 0;
-				else if (e->KeyChar == 'S' || e->KeyChar == 's' && directie1 != 1)
+				else if (e->KeyChar == 'S' || e->KeyChar == 's' && ultima_directie1 != 1)
 					directie1 = 3;
 
 				if (game_mode == 1)
 				{
-					if (e->KeyChar == '8' && directie2 != 3)
+					if (e->KeyChar == '8' && ultima_directie2 != 3)
 						directie2 = 1;
-					else if (e->KeyChar == '6' && directie2 != 0)
+					else if (e->KeyChar == '6' && ultima_directie2 != 0)
 						directie2 = 2;
-					else if (e->KeyChar == '4' && directie2 != 2)
+					else if (e->KeyChar == '4' && ultima_directie2 != 2)
 						directie2 = 0;
-					else if (e->KeyChar == '5' && directie2 != 1)
+					else if (e->KeyChar == '5' && ultima_directie2 != 1)
 						directie2 = 3;
 				}
 			}
-
-
-
+	
 			void Crestere_Dimensiune(array<PictureBox^>^ sarpe, int dimensiune)
 			{
 				//creare segment nou sarpe
@@ -401,11 +413,23 @@ namespace Snake {
 				this->Controls->Add(sarpe[dimensiune]);
 				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(sarpe[dimensiune]))->EndInit();
 
-				Scor++;
 				if (sarpe == sarpe1)
+				{
+					if (game_mode == 0)
+						Scor1++;
+					else
+						Scor1 += 2;
 					dimensiune_sarpe1++;
+				}
 				else if (sarpe == sarpe2)
+				{
+					if (game_mode == 0)
+						Scor2++;
+					else
+						Scor2 += 2;
+
 					dimensiune_sarpe2++;
+				}
 			}
 
 			System::Void Joc_Closing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
@@ -415,7 +439,11 @@ namespace Snake {
 
 			void End_Game()
 			{
-				Inserare_Scor();
+				Inserare_Scor(1);
+
+				if (game_mode == 1)
+					Inserare_Scor(2);
+
 				TimerID->Enabled = false;
 			}	 
 	};

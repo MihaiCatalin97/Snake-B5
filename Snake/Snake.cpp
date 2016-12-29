@@ -32,10 +32,14 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLi
 }
 
 
-void Inserare_Scor()
+void Inserare_Scor(int x)
 {
 	ofstream g("Scor.txt", std::ios_base::app | std::ios_base::out);
-	g << Nume << " " << Scor << "\n";
+
+	if (x==1 && Scor1!=0)
+		g << Nume1 << " " << Scor1 << "\n";
+	if (x==2 && Scor2!=0)
+		g << Nume2 << " " << Scor2 << "\n";
 }
 
 void Citire_Scoruri()

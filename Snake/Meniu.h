@@ -11,10 +11,7 @@ namespace Snake {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
-	/// <summary>
-	/// Summary for MyForm
-	/// </summary>
+	
 	public ref class Meniu : public System::Windows::Forms::Form
 	{
 	public:
