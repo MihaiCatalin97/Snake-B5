@@ -20,7 +20,7 @@ namespace Snake {
 
 			 bool crescut = false;
 			 bool doubleplayer = false;
-
+			 PictureBox^ Mancare;
 			 int game_mode;
 			 Timer^ TimerID;
 			 int x = 0;
@@ -49,8 +49,36 @@ namespace Snake {
 				Creare_Sarpe_Initial();
 				if (doubleplayer == true)
 					Creare_Sarpe_2();
+
+				plaseaza_Mancare();
 	}
 
+			void plaseaza_Mancare()
+			{
+				bool ok;
+				int x;
+				int y;
+				Point rez;
+				do
+				{
+					ok = true;
+					x = rand() % 10;
+					y = rand() % 10;
+					rez.X = x * 50;
+					rez.Y = 75 + y * 50;
+
+					for (int i = 0; i < dimensiune_sarpe1 && ok; i++)
+					if (sarpe1[i]->Location == rez)
+						ok = false;
+
+					for (int i = 0; i < dimensiune_sarpe2 && game_mode>3 && ok; i++)
+					if (sarpe2[i]->Location == rez)
+						ok = false;
+
+				} while (!ok);
+
+				Mancare->Location = rez;
+			}
 			~Fereastra_Joc()
 			{
 				if (components)
@@ -88,8 +116,13 @@ namespace Snake {
 				System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Fereastra_Joc::typeid));
 				resourcesx = resources;
 
-
-
+				Mancare = (gcnew System::Windows::Forms::PictureBox());
+				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(Mancare))->BeginInit();
+				Mancare->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"Snake_Body1.BackgroundImage")));
+				Mancare->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+				Mancare->Size = System::Drawing::Size(50, 50);
+				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(Mancare))->EndInit();
+				this->Controls->Add(Mancare);
 
 
 
@@ -131,6 +164,7 @@ namespace Snake {
 
 			void Miscare_Sarpe(array<PictureBox^>^ bucati_sarpe, int dimensiune, int directie)
 			{
+				
 				//muta toate segmentele inafara capului, 
 				//astfel ultimul segment ajunge in locul penultimului si primul in locul capului
 				for (int i = dimensiune - 1 - crescut; i > 0; i--)
@@ -190,10 +224,16 @@ namespace Snake {
 					End_Game();
 					this->Close();
 				}
+
+				
 			}
+
+		
+
 
 			bool Verifica_Coliziune(array<PictureBox^>^ bucati_sarpe, int dimensiune, array<PictureBox^>^ bucati_sarpe2, int dimensiune2)
 			{
+				
 
 		    	for (int i = 1; i < dimensiune; i++)
 
@@ -215,19 +255,31 @@ namespace Snake {
 
 			void Fereastra_Joc::timer1_Tick(System::Object^  sender, System::EventArgs^  e)
 			{
+
+				
 				if (doubleplayer == true)
 					Miscare_Sarpe(sarpe2, dimensiune_sarpe2, directie2);
 				Miscare_Sarpe(sarpe1, dimensiune_sarpe1, directie1);
-
-				if (x == 4)
+				 
+				if (sarpe1[0]->Location == Mancare->Location)
 				{
 					Crestere_Dimensiune();
-					if (doubleplayer == true)
-						Crestere_DimensiuneSarpe2();
-					x = 0;
+					plaseaza_Mancare();
 				}
-				else
-					x++;
+
+				if (doubleplayer == true)
+				   if (sarpe2[0]->Location == Mancare->Location)
+				{
+					Crestere_DimensiuneSarpe2();
+					plaseaza_Mancare();
+				}
+
+
+
+			
+
+				
+				
 			}
 
 			void Fereastra_Joc_KeyPress(Object^ sender, KeyPressEventArgs^ e) // se apeleaza la apasare de tasta
@@ -339,6 +391,6 @@ namespace Snake {
 			 }
 
 
-
+			 
 	};
 }

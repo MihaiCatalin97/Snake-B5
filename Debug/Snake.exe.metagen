@@ -20,6 +20,7 @@ Class Snake.Fereastra_Joc: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
+    plaseaza_Mancare(): PrivateScope, Public, HideBySig
     Creare_Sarpe_Initial(): PrivateScope, Public, HideBySig
     InitializeComponent(): PrivateScope, Public, HideBySig
     Miscare_Sarpe(PictureBox[], Int32, Int32): PrivateScope, Public, HideBySig
