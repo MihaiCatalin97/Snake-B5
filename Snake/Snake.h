@@ -11,6 +11,7 @@ struct inregistrare{
 	int Scor = 0;
 };
 
+int matrice_ocupare[10][10];
 inregistrare Scoruri[100];
 int Numar_Scoruri = 0;
 int Scor=0;

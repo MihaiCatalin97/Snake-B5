@@ -69,6 +69,15 @@
     <Image Include="..\..\..\..\..\Desktop\snake_head.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Snake_Head2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Snake_Head2.BackgroundImage.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Snake_Body2.BackgroundImage.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Meniu.resx">

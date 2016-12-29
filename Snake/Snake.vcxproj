@@ -127,8 +127,11 @@
     <Image Include="Images\snake_body.png">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </Image>
+    <Image Include="Images\Snake_Body2.BackgroundImage.png" />
+    <Image Include="Images\Snake_Head2.BackgroundImage.png" />
     <Image Include="small.ico" />
     <Image Include="Snake.ico" />
+    <Image Include="Snake_Head2.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
