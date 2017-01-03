@@ -39,6 +39,12 @@
     <ClInclude Include="Fereastra_Scor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Numejucator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Numejucatori.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

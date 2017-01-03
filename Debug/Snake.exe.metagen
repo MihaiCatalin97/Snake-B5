@@ -1,6 +1,8 @@
   Snake.Fereastra_Joc.resources - Embedded, ContainedInManifestFile, 
   Snake.Fereastra_Scor.resources - Embedded, ContainedInManifestFile, 
   Snake.Meniu.resources - Embedded, ContainedInManifestFile, 
+  Snake.Numejucator.resources - Embedded, ContainedInManifestFile, 
+  Snake.Numejucatori.resources - Embedded, ContainedInManifestFile, 
 ImageRuntimeVersion: v4.0.30319
 Assembly Snake, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
 	hash=SHA1, flags=PublicKey
@@ -31,6 +33,12 @@ Class Snake.Fereastra_Joc: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Joc_Closing(Object, FormClosingEventArgs): PrivateScope, Public, HideBySig
     End_Game(): PrivateScope, Public, HideBySig
 Class Snake.Fereastra_Scor: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Snake.Numejucator: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Snake.Numejucatori: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class Snake.Meniu: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit

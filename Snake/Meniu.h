@@ -2,6 +2,8 @@
 
 #include "Fereastra_Joc.h"
 #include "Fereastra_Scor.h"
+#include "Numejucator.h"
+#include "Numejucatori.h"
 
 namespace Snake {
 
@@ -55,9 +57,10 @@ namespace Snake {
 			this->Titlu_Meniu->Font = (gcnew System::Drawing::Font(L"Komika Axis", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Titlu_Meniu->ForeColor = System::Drawing::Color::YellowGreen;
-			this->Titlu_Meniu->Location = System::Drawing::Point(90, 20);
+			this->Titlu_Meniu->Location = System::Drawing::Point(68, 16);
+			this->Titlu_Meniu->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->Titlu_Meniu->Name = L"Titlu_Meniu";
-			this->Titlu_Meniu->Size = System::Drawing::Size(224, 82);
+			this->Titlu_Meniu->Size = System::Drawing::Size(182, 67);
 			this->Titlu_Meniu->TabIndex = 0;
 			this->Titlu_Meniu->Tag = L"";
 			this->Titlu_Meniu->Text = L"Snake!";
@@ -72,10 +75,10 @@ namespace Snake {
 			this->button_singleplayer->Font = (gcnew System::Drawing::Font(L"Marker Felt", 13.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button_singleplayer->ForeColor = System::Drawing::Color::White;
-			this->button_singleplayer->Location = System::Drawing::Point(100, 140);
+			this->button_singleplayer->Location = System::Drawing::Point(75, 114);
 			this->button_singleplayer->Margin = System::Windows::Forms::Padding(0);
 			this->button_singleplayer->Name = L"button_singleplayer";
-			this->button_singleplayer->Size = System::Drawing::Size(200, 50);
+			this->button_singleplayer->Size = System::Drawing::Size(150, 41);
 			this->button_singleplayer->TabIndex = 1;
 			this->button_singleplayer->Text = L"Single Player";
 			this->button_singleplayer->UseVisualStyleBackColor = false;
@@ -90,9 +93,10 @@ namespace Snake {
 			this->button_double_player->Font = (gcnew System::Drawing::Font(L"Marker Felt", 13.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button_double_player->ForeColor = System::Drawing::Color::White;
-			this->button_double_player->Location = System::Drawing::Point(100, 210);
+			this->button_double_player->Location = System::Drawing::Point(75, 171);
+			this->button_double_player->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button_double_player->Name = L"button_double_player";
-			this->button_double_player->Size = System::Drawing::Size(200, 50);
+			this->button_double_player->Size = System::Drawing::Size(150, 41);
 			this->button_double_player->TabIndex = 2;
 			this->button_double_player->Text = L"Double Player";
 			this->button_double_player->UseVisualStyleBackColor = true;
@@ -107,9 +111,10 @@ namespace Snake {
 			this->button_vscomputer->Font = (gcnew System::Drawing::Font(L"Marker Felt", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button_vscomputer->ForeColor = System::Drawing::Color::White;
-			this->button_vscomputer->Location = System::Drawing::Point(100, 280);
+			this->button_vscomputer->Location = System::Drawing::Point(75, 228);
+			this->button_vscomputer->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button_vscomputer->Name = L"button_vscomputer";
-			this->button_vscomputer->Size = System::Drawing::Size(200, 50);
+			this->button_vscomputer->Size = System::Drawing::Size(150, 41);
 			this->button_vscomputer->TabIndex = 2;
 			this->button_vscomputer->Text = L"Versus Computer";
 			this->button_vscomputer->UseVisualStyleBackColor = true;
@@ -124,9 +129,10 @@ namespace Snake {
 			this->button_scor->Font = (gcnew System::Drawing::Font(L"Marker Felt", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button_scor->ForeColor = System::Drawing::Color::White;
-			this->button_scor->Location = System::Drawing::Point(100, 350);
+			this->button_scor->Location = System::Drawing::Point(75, 284);
+			this->button_scor->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button_scor->Name = L"button_scor";
-			this->button_scor->Size = System::Drawing::Size(200, 50);
+			this->button_scor->Size = System::Drawing::Size(150, 41);
 			this->button_scor->TabIndex = 3;
 			this->button_scor->Text = L"Scor";
 			this->button_scor->UseVisualStyleBackColor = true;
@@ -141,9 +147,10 @@ namespace Snake {
 			this->button_exit->Font = (gcnew System::Drawing::Font(L"Marker Felt", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button_exit->ForeColor = System::Drawing::Color::White;
-			this->button_exit->Location = System::Drawing::Point(100, 420);
+			this->button_exit->Location = System::Drawing::Point(75, 341);
+			this->button_exit->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button_exit->Name = L"button_exit";
-			this->button_exit->Size = System::Drawing::Size(200, 50);
+			this->button_exit->Size = System::Drawing::Size(150, 41);
 			this->button_exit->TabIndex = 4;
 			this->button_exit->Text = L"Exit";
 			this->button_exit->UseVisualStyleBackColor = true;
@@ -151,9 +158,9 @@ namespace Snake {
 			// 
 			// Meniu
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(400, 550);
+			this->ClientSize = System::Drawing::Size(300, 447);
 			this->Controls->Add(this->button_exit);
 			this->Controls->Add(this->button_scor);
 			this->Controls->Add(this->button_double_player);
@@ -162,11 +169,13 @@ namespace Snake {
 			this->Controls->Add(this->Titlu_Meniu);
 			this->ForeColor = System::Drawing::Color::Gold;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->MaximizeBox = false;
 			this->Name = L"Meniu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"Main Menu";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &Meniu::Meniu_Closing);
+			this->Load += gcnew System::EventHandler(this, &Meniu::Meniu_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -174,18 +183,18 @@ namespace Snake {
 #pragma endregion
 	private: System::Void button_singleplayer_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-				 Fereastra_Joc^ form = gcnew Fereastra_Joc(0);
+				 Numejucator^ form = gcnew Numejucator(0);
 				 form->ShowDialog();
 	}
 
 	private: System::Void button_double_player_Click(System::Object^  sender, System::EventArgs^  e) 
 	{
-				 Fereastra_Joc^ form = gcnew Fereastra_Joc(1);
+				 Numejucatori^ form = gcnew Numejucatori();
 				 form->ShowDialog();
 	}
 
 	private: System::Void button_vscomputer_Click(System::Object^  sender, System::EventArgs^  e) {
-				 Fereastra_Joc^ form = gcnew Fereastra_Joc(2);
+				 Numejucator^ form = gcnew Numejucator(2);
 				 form->ShowDialog();
 	}
 
@@ -205,5 +214,7 @@ namespace Snake {
 	{
 		Application::Exit();
 	}
+private: System::Void Meniu_Load(System::Object^  sender, System::EventArgs^  e) {
+}
 };
 }
