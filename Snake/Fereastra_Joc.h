@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include "Snake.h"
+#include <msclr\marshal_cppstd.h>
 using namespace std;
 
 namespace Snake {
@@ -15,17 +16,75 @@ namespace Snake {
 	{
 			array<PictureBox^>^ sarpe1;
 			array<PictureBox^>^ sarpe2;
+			array<PictureBox^>^ bonusuri;
 			int Mutare_Urmatoare;
 
 			 System::ComponentModel::ComponentResourceManager^  resourcesx;
 
 			 PictureBox^ Mancare;
 			 int game_mode, dimensiune_sarpe2 = 2, directie2 = 0,dimensiune_sarpe1 = 2, directie1 = 0, ultima_directie1=0,ultima_directie2=0;
-			 Timer^ TimerID;
+			 Timer^ Timer_Sarpe1;
+			 Timer^ Timer_Sarpe2;
+			 Timer^ Timer_Bonusuri;
+			 Timer^ Timer_Speed_Bonus;
 
 			 System::Windows::Forms::Label^  label_Nume;
 			 System::Windows::Forms::Label^  label_Scor;
 			 System::ComponentModel::Container ^components;
+
+			 void Consume_Bonus(int x, array<PictureBox^>^ sarpe)
+			 {
+				 if (x == 0)
+				 {
+					 if (sarpe == sarpe1)
+						 Scor1 = Scor1*(game_mode>0 ? 2 : 1.5) + 1;
+					 else
+						 Scor2 = Scor2*(game_mode>0 ? 2 : 1.5) + 1;
+
+					 Refresh_Score();
+				 }
+				 else if (x == 1)
+				 {
+					 if (sarpe == sarpe1)
+					 {
+						 Scor1++;
+						 Timer_Sarpe1->Interval = 250;
+					 }
+					 else
+					 {
+						 Scor2++;
+						 Timer_Sarpe2->Interval = 250;
+					 }
+
+					 Refresh_Score();
+					 Timer_Speed_Bonus->Enabled = false;
+					 Timer_Speed_Bonus->Enabled = true;
+				 }
+				 else if (x == 2)
+				 {
+					 if (sarpe == sarpe1)
+					 {
+						 Timer_Sarpe1->Interval = 1000;
+					 }
+					 else
+					 {
+						 Timer_Sarpe2->Interval = 1000;
+					 }
+
+
+					 Timer_Speed_Bonus->Enabled = false;
+					 Timer_Speed_Bonus->Enabled = true;
+				 }
+				 else if (x == 3)
+				 {
+					 if (sarpe == sarpe1)
+						 Scor1 = Scor1/2;
+					 else
+						 Scor2 = Scor2/2;
+
+					 Refresh_Score();
+				 }
+			 }
 
 			 void Gasire_Mutari()
 			 {
@@ -98,10 +157,6 @@ namespace Snake {
 							 }
 						 }
 					 }
-					 
-					 if (!adaugat)
-						 ;//
-
 			 }
 
 			 void Initializare_Custom()
@@ -113,6 +168,7 @@ namespace Snake {
 				 resourcesx = resources;
 
 				 sarpe1 = (gcnew array<System::Windows::Forms::PictureBox^>(100));
+				 bonusuri = (gcnew array<System::Windows::Forms::PictureBox^>(4));
 				 Creare_Sarpe(sarpe1);
 
 				 if (game_mode > 0)
@@ -128,10 +184,28 @@ namespace Snake {
 					for (int j = 0; j<10; j++)
 						matrice_ocupare[i][j] = 0;
 
-				 TimerID = gcnew System::Windows::Forms::Timer();
-				 TimerID->Tick += gcnew System::EventHandler(this, &Fereastra_Joc::timer1_Tick);
-				 TimerID->Interval = 500;
-				 TimerID->Enabled = true;
+				 Timer_Sarpe1 = gcnew System::Windows::Forms::Timer();
+				 Timer_Sarpe1->Tick += gcnew System::EventHandler(this, &Fereastra_Joc::timer1_Tick);
+				 Timer_Sarpe1->Interval = 500;
+				 Timer_Sarpe1->Enabled = true;
+
+				 if (game_mode>0)
+				 {
+					 Timer_Sarpe2 = gcnew System::Windows::Forms::Timer();
+					 Timer_Sarpe2->Tick += gcnew System::EventHandler(this, &Fereastra_Joc::timer2_Tick);
+					 Timer_Sarpe2->Interval = 500;
+					 Timer_Sarpe2->Enabled = true;
+				 }
+				 
+				 Timer_Bonusuri = gcnew System::Windows::Forms::Timer();
+				 Timer_Bonusuri->Tick += gcnew System::EventHandler(this, &Fereastra_Joc::timer_bonusuri_Tick);
+				 Timer_Bonusuri->Interval = 5000;
+				 Timer_Bonusuri->Enabled = true;
+
+				 Timer_Speed_Bonus = gcnew System::Windows::Forms::Timer();
+				 Timer_Speed_Bonus->Tick += gcnew System::EventHandler(this, &Fereastra_Joc::timer_speed_Tick);
+				 Timer_Speed_Bonus->Interval = 3100;
+				 Timer_Speed_Bonus->Enabled = false;
 
 				 InitializeComponent();
 				 this->KeyPreview = true;
@@ -139,10 +213,31 @@ namespace Snake {
 
 				 Mancare = (gcnew System::Windows::Forms::PictureBox());
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(Mancare))->BeginInit();
-				 Mancare->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"Snake_Body1.BackgroundImage")));
+				 Mancare->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"apple")));
 				 Mancare->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 				 Mancare->Size = System::Drawing::Size(50, 50);
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(Mancare))->EndInit();
+
+				 for (int i = 0; i < bonusuri->Length; i++)
+				 {
+					 bonusuri[i] = (gcnew System::Windows::Forms::PictureBox());
+					 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(bonusuri[i]))->BeginInit();
+					 bonusuri[i]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+					 bonusuri[i]->Size = System::Drawing::Size(50, 50);
+					 bonusuri[i]->Visible = false;
+					 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(bonusuri[i]))->EndInit();
+					 this->Controls->Add(bonusuri[i]);
+				 }
+
+				 bonusuri[0]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"double_score")));
+				 bonusuri[1]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"bonus_speed")));
+				 bonusuri[2]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"slow")));
+				 bonusuri[3]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"half_Score")));
+
+				 bonusuri_plasate[0] = 0;
+				 bonusuri_plasate[1] = 0;
+				 bonusuri_plasate[2] = 0;
+			     bonusuri_plasate[3] = 0;
 
 				 this->Controls->Add(Mancare);
 				 this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &Fereastra_Joc::Joc_Closing);
@@ -202,6 +297,11 @@ namespace Snake {
 
 			 void plaseaza_Mancare()
 			 {
+				 Mancare->Location = getRandomPoint(2);	 
+			 }
+
+			 Point getRandomPoint(int type)
+			 {
 				 bool ok;
 				 int x;
 				 int y;
@@ -218,9 +318,9 @@ namespace Snake {
 						 ok = false;
 
 				 } while (!ok);
-				 
-				 Mancare->Location = rez;
-				 matrice_ocupare[x][y] = 2;
+				 matrice_ocupare[x][y] = type;
+
+				 return rez;
 			 }
 
 			~Fereastra_Joc()
@@ -336,7 +436,7 @@ namespace Snake {
 					End_Game();
 					//this->Close();
 				}
-				else
+				else if (matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] != 0)
 				{
 					if (matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] == 2)
 					{
@@ -344,7 +444,18 @@ namespace Snake {
 						Refresh_Score();
 						plaseaza_Mancare();
 					}
-
+					else
+					{
+						int bonus_number = matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] - 3;
+						Consume_Bonus(bonus_number, bucati_sarpe);
+						bonusuri[bonus_number]->Visible = false;
+						bonusuri_plasate[bonus_number] = 0;
+					}
+					bucati_sarpe[0]->Location = System::Drawing::Point(Next_Location);
+					matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] = 1;
+				}
+				else
+				{
 					bucati_sarpe[0]->Location = System::Drawing::Point(Next_Location);
 					matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] = 1;
 				}
@@ -352,23 +463,54 @@ namespace Snake {
 
 			void Fereastra_Joc::timer1_Tick(System::Object^  sender, System::EventArgs^  e)
 			{
+				Miscare_Sarpe(sarpe1, dimensiune_sarpe1, directie1);
+				ultima_directie1 = directie1;
+			}
+
+			void Fereastra_Joc::timer2_Tick(System::Object^  sender, System::EventArgs^  e)
+			{
 				if (game_mode == 2)
 				{
-					Miscare_Sarpe(sarpe1, dimensiune_sarpe1, directie1);
-					ultima_directie1 = directie1;
 					Mutare_Computer();
+				}
+				else if (game_mode == 1)
+				{
+					Miscare_Sarpe(sarpe2, dimensiune_sarpe2, directie2);
+					ultima_directie2 = directie2;
+				}
+			}
+
+			void Fereastra_Joc::timer_bonusuri_Tick(System::Object^  sender, System::EventArgs^  e)
+			{
+				bool bonus_plasat = false;
+				int i;
+				for (i = 0; i < bonusuri->Length && !bonus_plasat;i++)
+					if (bonusuri_plasate[i] == 1)
+						bonus_plasat = true;
+
+				if (!bonus_plasat)
+				{
+					int numar_Bonus = rand() % (bonusuri->Length);
+					bonusuri_plasate[numar_Bonus] = 1;
+					bonusuri[numar_Bonus]->Location = getRandomPoint(3 + numar_Bonus);
+					bonusuri[numar_Bonus]->Visible = true;
 				}
 				else
 				{
-					Miscare_Sarpe(sarpe1, dimensiune_sarpe1, directie1);
-					ultima_directie1 = directie1;
-					
-					if (game_mode == 1)
-					{
-						Miscare_Sarpe(sarpe2, dimensiune_sarpe2, directie2);
-						ultima_directie2 = directie2;
-					}	
+					bonusuri_plasate[i - 1] = 0;
+					bonusuri[i-1]->Visible = false;
+					matrice_ocupare[bonusuri[i - 1]->Location.X / 50][(bonusuri[i - 1]->Location.Y - 75) / 50] = 0;
 				}
+			}
+
+			void Fereastra_Joc::timer_speed_Tick(System::Object^  sender, System::EventArgs^  e)
+			{
+				Timer_Sarpe1->Interval = 500;
+
+				if (game_mode>0)
+					Timer_Sarpe2->Interval = 500;
+
+				Timer_Speed_Bonus->Enabled = false;
 			}
 
 			void Mutare_Computer()
@@ -444,7 +586,12 @@ namespace Snake {
 				if (game_mode == 1)
 					Inserare_Scor(2);
 
-				TimerID->Enabled = false;
+				Timer_Sarpe1->Enabled = false;
+				Timer_Speed_Bonus->Enabled = false;
+				Timer_Bonusuri->Enabled = false;
+
+				if (game_mode>0)
+					Timer_Sarpe2->Enabled = false;
 			}	 
 	};
 }
