@@ -130,6 +130,11 @@
   <ItemGroup>
     <Image Include="..\..\..\..\..\Desktop\menu_button_bg.png" />
     <Image Include="..\..\..\..\..\Desktop\snake_head.png" />
+    <Image Include="Images\apple.png" />
+    <Image Include="Images\bonus_speed.png" />
+    <Image Include="Images\double_score.png" />
+    <Image Include="Images\half_Score.png" />
+    <Image Include="Images\slow.png" />
     <Image Include="Images\snake_body.png">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </Image>

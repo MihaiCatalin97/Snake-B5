@@ -84,6 +84,21 @@
     <Image Include="Images\Snake_Body2.BackgroundImage.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Images\apple.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\bonus_speed.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\double_score.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\half_Score.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\slow.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Meniu.resx">
@@ -93,6 +108,12 @@
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="Fereastra_Scor.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Numejucator.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Numejucatori.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>
