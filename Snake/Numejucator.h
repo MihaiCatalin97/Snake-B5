@@ -1,5 +1,6 @@
 #pragma once
 #include <msclr\marshal_cppstd.h>
+
 namespace Snake {
 
 	using namespace System;

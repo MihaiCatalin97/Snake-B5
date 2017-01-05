@@ -103,6 +103,12 @@
     <ClInclude Include="Fereastra_Scor.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Gameover1.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Gameover2.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Meniu.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -157,6 +163,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Fereastra_Scor.resx">
       <DependentUpon>Fereastra_Scor.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gameover1.resx">
+      <DependentUpon>Gameover1.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gameover2.resx">
+      <DependentUpon>Gameover2.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Meniu.resx">
       <DependentUpon>Meniu.h</DependentUpon>

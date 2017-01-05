@@ -1,6 +1,9 @@
 #include <Windows.h>
 #include "Snake.h"
 #include <msclr\marshal_cppstd.h>
+#include "Gameover1.h"
+#include "Gameover2.h"
+
 using namespace std;
 
 namespace Snake {
@@ -434,7 +437,33 @@ namespace Snake {
 				if (matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] == 1)
 				{
 					End_Game();
-					//this->Close();
+
+					if (game_mode == 0)
+					
+						this->Visible = false;
+
+					if (game_mode == 0)
+					{
+						Gameover2 form ;
+						form.ShowDialog();
+					}
+
+					if (game_mode == 1)
+					{
+						Gameover^ form = gcnew Gameover(1);
+						form->ShowDialog();
+					}
+
+					if (game_mode == 2)
+					{
+						Gameover2^ form = gcnew Gameover2();
+						form->ShowDialog();
+					}
+						
+						this->Close();
+					
+
+				
 				}
 				else if (matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] != 0)
 				{
@@ -577,6 +606,7 @@ namespace Snake {
 			System::Void Joc_Closing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 			{
 				End_Game();
+				
 			}
 
 			void End_Game()
@@ -585,6 +615,7 @@ namespace Snake {
 
 				if (game_mode == 1)
 					Inserare_Scor(2);
+				
 
 				Timer_Sarpe1->Enabled = false;
 				Timer_Speed_Bonus->Enabled = false;
@@ -592,6 +623,8 @@ namespace Snake {
 
 				if (game_mode>0)
 					Timer_Sarpe2->Enabled = false;
+
+				
 			}	 
 	};
 }
