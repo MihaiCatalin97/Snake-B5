@@ -450,7 +450,7 @@ namespace Snake {
 
 					if (game_mode == 1)
 					{
-						Gameover^ form = gcnew Gameover(1);
+						Gameover1^ form = gcnew Gameover1(1);
 						form->ShowDialog();
 					}
 

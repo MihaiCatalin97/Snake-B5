@@ -15,6 +15,7 @@ namespace Snake {
 	/// </summary>
 	public ref class Gameover2 : public System::Windows::Forms::Form
 	{
+		System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Gameover2::typeid));
 	public:
 		Gameover2(void)
 		{
@@ -60,6 +61,7 @@ namespace Snake {
 		}
 		void InitializeComponent(void)
 		{
+			
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
@@ -73,9 +75,8 @@ namespace Snake {
 			this->label1->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->label1->Location = System::Drawing::Point(187, 144);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(46, 24);
+			this->label1->Size = System::Drawing::Size(0, 24);
 			this->label1->TabIndex = 3;
-			
 			// 
 			// label2
 			// 
@@ -85,13 +86,13 @@ namespace Snake {
 			this->label2->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->label2->Location = System::Drawing::Point(30, 144);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(59, 24);
+			this->label2->Size = System::Drawing::Size(0, 24);
 			this->label2->TabIndex = 4;
-			
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
+			this->label4->BackColor = System::Drawing::Color::Transparent;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 27.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label4->ForeColor = System::Drawing::Color::YellowGreen;
@@ -105,6 +106,7 @@ namespace Snake {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(284, 234);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label2);
@@ -113,8 +115,6 @@ namespace Snake {
 			this->Text = L"Gameover2";
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
-		
 
 		}
 #pragma endregion

@@ -166,6 +166,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gameover1.resx">
       <DependentUpon>Gameover1.h</DependentUpon>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">  $(IntDir)/ &lt;placeholder&gt; . Gameover1 .resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Gameover2.resx">
       <DependentUpon>Gameover2.h</DependentUpon>

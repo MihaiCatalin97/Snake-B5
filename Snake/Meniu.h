@@ -54,6 +54,7 @@ namespace Snake {
 			// 
 			this->Titlu_Meniu->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->Titlu_Meniu->AutoSize = true;
+			this->Titlu_Meniu->BackColor = System::Drawing::Color::Transparent;
 			this->Titlu_Meniu->Font = (gcnew System::Drawing::Font(L"Komika Axis", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Titlu_Meniu->ForeColor = System::Drawing::Color::YellowGreen;
@@ -68,6 +69,7 @@ namespace Snake {
 			// 
 			// button_singleplayer
 			// 
+			this->button_singleplayer->BackColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->button_singleplayer->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button_singleplayer.BackgroundImage")));
 			this->button_singleplayer->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->button_singleplayer->CausesValidation = false;
@@ -94,7 +96,7 @@ namespace Snake {
 				static_cast<System::Byte>(0)));
 			this->button_double_player->ForeColor = System::Drawing::Color::White;
 			this->button_double_player->Location = System::Drawing::Point(75, 171);
-			this->button_double_player->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button_double_player->Margin = System::Windows::Forms::Padding(2);
 			this->button_double_player->Name = L"button_double_player";
 			this->button_double_player->Size = System::Drawing::Size(150, 41);
 			this->button_double_player->TabIndex = 2;
@@ -112,7 +114,7 @@ namespace Snake {
 				static_cast<System::Byte>(0)));
 			this->button_vscomputer->ForeColor = System::Drawing::Color::White;
 			this->button_vscomputer->Location = System::Drawing::Point(75, 228);
-			this->button_vscomputer->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button_vscomputer->Margin = System::Windows::Forms::Padding(2);
 			this->button_vscomputer->Name = L"button_vscomputer";
 			this->button_vscomputer->Size = System::Drawing::Size(150, 41);
 			this->button_vscomputer->TabIndex = 2;
@@ -130,7 +132,7 @@ namespace Snake {
 				static_cast<System::Byte>(0)));
 			this->button_scor->ForeColor = System::Drawing::Color::White;
 			this->button_scor->Location = System::Drawing::Point(75, 284);
-			this->button_scor->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button_scor->Margin = System::Windows::Forms::Padding(2);
 			this->button_scor->Name = L"button_scor";
 			this->button_scor->Size = System::Drawing::Size(150, 41);
 			this->button_scor->TabIndex = 3;
@@ -148,7 +150,7 @@ namespace Snake {
 				static_cast<System::Byte>(0)));
 			this->button_exit->ForeColor = System::Drawing::Color::White;
 			this->button_exit->Location = System::Drawing::Point(75, 341);
-			this->button_exit->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button_exit->Margin = System::Windows::Forms::Padding(2);
 			this->button_exit->Name = L"button_exit";
 			this->button_exit->Size = System::Drawing::Size(150, 41);
 			this->button_exit->TabIndex = 4;
@@ -160,6 +162,7 @@ namespace Snake {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(300, 447);
 			this->Controls->Add(this->button_exit);
 			this->Controls->Add(this->button_scor);
@@ -169,7 +172,7 @@ namespace Snake {
 			this->Controls->Add(this->Titlu_Meniu);
 			this->ForeColor = System::Drawing::Color::Gold;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->MaximizeBox = false;
 			this->Name = L"Meniu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;

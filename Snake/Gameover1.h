@@ -13,11 +13,13 @@ namespace Snake {
 	/// <summary>
 	/// Summary for Gameover
 	/// </summary>
-	public ref class Gameover : public System::Windows::Forms::Form
+	public ref class Gameover1 : public System::Windows::Forms::Form
 	{
+
+		System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Gameover1::typeid));
 		int game_mode;
 	public:
-		Gameover(int game_mode)
+		Gameover1(int game_mode)
 		{
 			this->game_mode = game_mode;
 			InitializeComponent();
@@ -31,7 +33,7 @@ namespace Snake {
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~Gameover()
+		~Gameover1()
 		{
 			if (components)
 			{
@@ -78,6 +80,7 @@ namespace Snake {
 
 		void InitializeComponent(void)
 		{
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"BackgroundImage2")));
 			this->Titlu_Meniu = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -88,6 +91,7 @@ namespace Snake {
 			// 
 			// Titlu_Meniu
 			// 
+			this->Titlu_Meniu->BackColor = System::Drawing::Color::Transparent;
 			this->Titlu_Meniu->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->Titlu_Meniu->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -102,6 +106,7 @@ namespace Snake {
 			// 
 			// label1
 			// 
+			this->label1->BackColor = System::Drawing::Color::Transparent;
 			this->label1->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -116,6 +121,7 @@ namespace Snake {
 			// 
 			// label2
 			// 
+			this->label2->BackColor = System::Drawing::Color::Transparent;
 			this->label2->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -127,10 +133,11 @@ namespace Snake {
 			this->label2->TabIndex = 3;
 			this->label2->Text = L"nume1";
 			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			this->label2->Click += gcnew System::EventHandler(this, &Gameover::label2_Click);
+			this->label2->Click += gcnew System::EventHandler(this, &Gameover1::label2_Click);
 			// 
 			// label3
 			// 
+			this->label3->BackColor = System::Drawing::Color::Transparent;
 			this->label3->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -142,10 +149,11 @@ namespace Snake {
 			this->label3->TabIndex = 4;
 			this->label3->Text = L"nume2";
 			this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			this->label3->Click += gcnew System::EventHandler(this, &Gameover::label3_Click);
+			this->label3->Click += gcnew System::EventHandler(this, &Gameover1::label3_Click);
 			// 
 			// label4
 			// 
+			this->label4->BackColor = System::Drawing::Color::Transparent;
 			this->label4->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -160,6 +168,7 @@ namespace Snake {
 			// 
 			// label5
 			// 
+			this->label5->BackColor = System::Drawing::Color::Transparent;
 			this->label5->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -172,19 +181,20 @@ namespace Snake {
 			this->label5->Text = L"situatiejoc";
 			this->label5->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
-			// Gameover
+			// Gameover1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(333, 333);
+			
+			this->ClientSize = System::Drawing::Size(347, 333);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->Titlu_Meniu);
-			this->Name = L"Gameover";
-			this->Text = L"Gameover";
+			this->Name = L"Gameover1";
+			this->Text = L"Gameover1";
 			this->ResumeLayout(false);
 
 		}
