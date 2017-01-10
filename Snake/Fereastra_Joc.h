@@ -26,7 +26,7 @@ namespace Snake {
 		System::ComponentModel::ComponentResourceManager^  resourcesx;
 
 		PictureBox^ Mancare;
-		int game_mode, dimensiune_sarpe2 = 2, directie2 = 0, dimensiune_sarpe1 = 2, directie1 = 0, ultima_directie1 = 0, ultima_directie2 = 0;
+		int game_mode, directie2 = 0, directie1 = 0, ultima_directie1 = 0, ultima_directie2 = 0;
 		Timer^ Timer_Sarpe1;
 		Timer^ Timer_Sarpe2;
 		Timer^ Timer_Bonusuri;
@@ -167,6 +167,7 @@ namespace Snake {
 		{
 			Scor1 = 0;
 			Scor2 = 0;
+			dimensiune_sarpe1 = dimensiune_sarpe2 = 2;
 
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Fereastra_Joc::typeid));
 			resourcesx = resources;
@@ -263,11 +264,11 @@ namespace Snake {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(sarpe[0]))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(sarpe[1]))->BeginInit();
 
-			sarpe[0]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake1head3")));
+			sarpe[0]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (sarpe==sarpe2)) + "head3")));
 			sarpe[0]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			sarpe[0]->Size = System::Drawing::Size(50, 50);
 
-			sarpe[1]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake1tail1")));
+			sarpe[1]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (sarpe==sarpe2)) + "tail1")));
 			sarpe[1]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			sarpe[1]->Size = System::Drawing::Size(50, 50);
 
@@ -297,18 +298,18 @@ namespace Snake {
 
 		}
 
-	public: Fereastra_Joc(int game_mode)
+		public: Fereastra_Joc(int game_mode)
 	{
 				this->game_mode = game_mode;
 				Initializare_Custom();
 	}
 
-			void plaseaza_Mancare()
+		void plaseaza_Mancare()
 			{
 				Mancare->Location = getRandomPoint(2);
 			}
 
-			Point getRandomPoint(int type)
+		Point getRandomPoint(int type)
 			{
 				bool ok;
 				int x;
@@ -331,7 +332,7 @@ namespace Snake {
 				return rez;
 			}
 
-			~Fereastra_Joc()
+		~Fereastra_Joc()
 			{
 				if (components)
 				{
@@ -339,7 +340,7 @@ namespace Snake {
 				}
 			}
 
-			void InitializeComponent(void)
+		void InitializeComponent(void)
 			{
 				this->label_Nume = (gcnew System::Windows::Forms::Label());
 				this->label_Scor = (gcnew System::Windows::Forms::Label());
@@ -373,7 +374,7 @@ namespace Snake {
 				this->ResumeLayout(false);
 			}
 
-			void Refresh_Score()
+		void Refresh_Score()
 			{
 				this->label_Nume->Text = L"Nume: " + gcnew String(Nume1.c_str());
 				this->label_Scor->Text = L"Scor: " + Scor1;
@@ -385,24 +386,12 @@ namespace Snake {
 				}
 			}
 
-			void Miscare_Sarpe(array<PictureBox^>^ bucati_sarpe, int dimensiune, int directie, array<int>^ ordine, int ultima_directie)
+		void Miscare_Sarpe(array<PictureBox^>^ bucati_sarpe, int* dimensiune, int directie, array<int>^ ordine, int ultima_directie, int* scor)
 			{
-
-				//muta toate segmentele inafara capului, 
-				//astfel ultimul segment ajunge in locul penultimului si primul in locul capului
-
-				bool crescut = dimensiune > 2 && bucati_sarpe[ordine[dimensiune - 2]]->Location == bucati_sarpe[ordine[dimensiune - 3]]->Location;
+				bool crescut = (*dimensiune) > 2 && bucati_sarpe[ordine[(*dimensiune) - 2]]->Location == bucati_sarpe[ordine[(*dimensiune) - 3]]->Location;
 
 				if (!crescut)
-					matrice_ocupare[bucati_sarpe[ordine[dimensiune - 2]]->Location.X / 50][(bucati_sarpe[ordine[dimensiune - 2]]->Location.Y - 75) / 50] = 0;
-
-				bucati_sarpe[ordine[dimensiune - 2]]->Location = bucati_sarpe[0]->Location;
-				int aux = ordine[dimensiune - 2];
-				for (int i = dimensiune - 2; i >= 1; i--)
-				{
-					ordine[i] = ordine[i - 1];
-				}
-				ordine[0] = aux;
+					matrice_ocupare[bucati_sarpe[ordine[(*dimensiune) - 2]]->Location.X / 50][(bucati_sarpe[ordine[*dimensiune - 2]]->Location.Y - 75) / 50] = 0;
 
 				//calculeaza noua pozitie a capului in functie de directie
 				Point Next_Location = bucati_sarpe[0]->Location;
@@ -443,36 +432,19 @@ namespace Snake {
 				if (Next_Location.Y >= 575)
 					Next_Location.Y = 75;
 
+				bool ok = true;
+
 				if (matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] == 1)
 				{
-					this->Timer_Bonusuri->Enabled = false;
-					this->Timer_Sarpe1->Enabled = false;
-					this->Timer_Speed_Bonus->Enabled = false;
-
-					if (game_mode == 0)
-					{
-						this->Visible = false;
-						Gameover2 form;
-						form.ShowDialog();
-					}
-
-					if (game_mode == 1)
-						this->Timer_Sarpe2->Enabled = false;
-					Gameover1^ form = gcnew Gameover1(1);
-					form->ShowDialog();
-				}
-
-				if (game_mode == 2)
-				{
-					this->Timer_Sarpe2->Enabled = false;
-					Gameover2^ form = gcnew Gameover2();
-					form->ShowDialog();
+					ok = false;
+					End_Game();
+					this->Close();
 				}
 				else if (matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] != 0)
 				{
 					if (matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] == 2)
 					{
-						Crestere_Dimensiune(bucati_sarpe, dimensiune);
+						Crestere_Dimensiune(bucati_sarpe, dimensiune,ordine, scor);
 						Refresh_Score();
 						plaseaza_Mancare();
 					}
@@ -483,63 +455,72 @@ namespace Snake {
 						bonusuri[bonus_number]->Visible = false;
 						bonusuri_plasate[bonus_number] = 0;
 					}
-					bucati_sarpe[0]->Location = System::Drawing::Point(Next_Location);
+				}
+
+				if (ok)
+				{	
+					//modificare a pozitiei ultimului element si modificarea vectorului de ordine a segmentelor
+					bucati_sarpe[ordine[*dimensiune - 2]]->Location = bucati_sarpe[0]->Location;
+					int aux = ordine[*dimensiune - 2];
+					for (int i = *dimensiune - 2; i >= 1; i--)
+					{
+						ordine[i] = ordine[i - 1];
+					}
+					ordine[0] = aux;
+
+					bucati_sarpe[0]->Location = Next_Location;
 					matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] = 1;
-				}
-				else
-				{
-					bucati_sarpe[0]->Location = System::Drawing::Point(Next_Location);
-					matrice_ocupare[Next_Location.X / 50][(Next_Location.Y - 75) / 50] = 1;
-				}
 
-				Point Locatie_Precedent_Cap = bucati_sarpe[ordine[1]]->Location;
+					//schimbare imagini sarpe
+					Point Locatie_Precedent_Cap = bucati_sarpe[ordine[1]]->Location;
 
-				if (dimensiune > 2)
-				{
-					if (Next_Location.X == Locatie_Precedent_Cap.X)
-						bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake1straight2")));
-					else if (Next_Location.Y == Locatie_Precedent_Cap.Y)
-						bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake1straight1")));
-					else if ((ultima_directie == 0 && directie == 3) || (ultima_directie == 1 && directie == 2))
-						bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake1curved2")));
-					else if ((ultima_directie == 0 && directie == 1) || (ultima_directie == 3 && directie == 2))
-						bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake1curved1")));
-					else if ((ultima_directie == 2 && directie == 1) || (ultima_directie == 3 && directie == 0))
-						bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake1curved0")));
-					else if ((ultima_directie == 1 && directie == 0) || (ultima_directie == 2 && directie == 3))
-						bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake1curved3")));
+					if (*dimensiune > 2)
+					{
+						if (Next_Location.X == Locatie_Precedent_Cap.X)
+							bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe==sarpe2)) + "straight2")));
+						else if (Next_Location.Y == Locatie_Precedent_Cap.Y)
+							bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "straight1")));
+						else if ((ultima_directie == 0 && directie == 3) || (ultima_directie == 1 && directie == 2))
+							bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "curved2")));
+						else if ((ultima_directie == 0 && directie == 1) || (ultima_directie == 3 && directie == 2))
+							bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "curved1")));
+						else if ((ultima_directie == 2 && directie == 1) || (ultima_directie == 3 && directie == 0))
+							bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "curved0")));
+						else if ((ultima_directie == 1 && directie == 0) || (ultima_directie == 2 && directie == 3))
+							bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "curved3")));
 
-				}
+					}
 
-				Point Locatie_Coada = bucati_sarpe[ordine[dimensiune - 2]]->Location;
-				Point Locatie_Segment_Precedent;
+					Point Locatie_Coada = bucati_sarpe[ordine[*dimensiune - 2]]->Location;
+					Point Locatie_Segment_Precedent;
 
-				if (dimensiune > 2)
-					Locatie_Segment_Precedent = bucati_sarpe[ordine[dimensiune - 3]]->Location;
-				else
-					Locatie_Segment_Precedent = bucati_sarpe[0]->Location;
-
-				if (Locatie_Coada.X == Locatie_Segment_Precedent.X)
-				{
-					if (Locatie_Coada.Y < Locatie_Segment_Precedent.Y || (Locatie_Coada.Y == 525 && Locatie_Segment_Precedent.Y == 75))
-						bucati_sarpe[ordine[dimensiune - 2]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake1tail1")));
+					if (*dimensiune > 2)
+						Locatie_Segment_Precedent = bucati_sarpe[ordine[*dimensiune - 3]]->Location;
 					else
-						bucati_sarpe[ordine[dimensiune - 2]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake1tail3")));
-				}
-				else
-				{
-					if (Locatie_Coada.X < Locatie_Segment_Precedent.X || (Locatie_Coada.X == 450 && Locatie_Segment_Precedent.X == 0))
-						bucati_sarpe[ordine[dimensiune - 2]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake1tail0")));
-					else
-						bucati_sarpe[ordine[dimensiune - 2]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake1tail2")));
-				}
+						Locatie_Segment_Precedent = bucati_sarpe[0]->Location;
 
-				bucati_sarpe[0]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake1head" + directie)));
-	}
+					if (Locatie_Coada.X == Locatie_Segment_Precedent.X)
+					{
+						if ((Locatie_Coada.Y < Locatie_Segment_Precedent.Y || (Locatie_Coada.Y == 525 && Locatie_Segment_Precedent.Y == 75)) && !(Locatie_Coada.Y == 75 && Locatie_Segment_Precedent.Y == 525))
+							bucati_sarpe[ordine[*dimensiune - 2]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "tail1")));
+						else
+							bucati_sarpe[ordine[*dimensiune - 2]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "tail3")));
+					}
+					else
+					{
+						if ((Locatie_Coada.X < Locatie_Segment_Precedent.X || (Locatie_Coada.X == 450 && Locatie_Segment_Precedent.X == 0)) && !(Locatie_Coada.X == 0 && Locatie_Segment_Precedent.X == 450))
+							bucati_sarpe[ordine[*dimensiune - 2]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "tail0")));
+						else
+							bucati_sarpe[ordine[*dimensiune - 2]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "tail2")));
+					}
+
+					bucati_sarpe[0]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "head" + directie)));
+				}
+			}
 
 	void Fereastra_Joc::timer1_Tick(System::Object^  sender, System::EventArgs^  e)
 	{
-		Miscare_Sarpe(sarpe1, dimensiune_sarpe1, directie1, Ordine_Sarpe1, ultima_directie1);
+		Miscare_Sarpe(sarpe1, &dimensiune_sarpe1, directie1, Ordine_Sarpe1, ultima_directie1, &Scor1);
 		ultima_directie1 = directie1;
 	}
 
@@ -551,7 +532,7 @@ namespace Snake {
 		}
 		else if (game_mode == 1)
 		{
-			Miscare_Sarpe(sarpe2, dimensiune_sarpe2, directie2, Ordine_Sarpe2, ultima_directie2);
+			Miscare_Sarpe(sarpe2, &dimensiune_sarpe2, directie2, Ordine_Sarpe2, ultima_directie2, &Scor2);
 			ultima_directie2 = directie2;
 		}
 	}
@@ -592,7 +573,7 @@ namespace Snake {
 	void Mutare_Computer()
 	{
 		Gasire_Mutari();
-		Miscare_Sarpe(sarpe2, dimensiune_sarpe2, Mutare_Urmatoare, Ordine_Sarpe2, ultima_directie2);
+		Miscare_Sarpe(sarpe2, &dimensiune_sarpe2, Mutare_Urmatoare, Ordine_Sarpe2, ultima_directie2, &Scor2);
 		ultima_directie2 = Mutare_Urmatoare;
 	}
 
@@ -621,41 +602,27 @@ namespace Snake {
 		}
 	}
 
-	void Crestere_Dimensiune(array<PictureBox^>^ sarpe, int dimensiune)
+	void Crestere_Dimensiune(array<PictureBox^>^ sarpe, int* dimensiune, array<int>^ ordine, int* scor)
 	{
 		//creare segment nou sarpe
-		sarpe[dimensiune] = (gcnew System::Windows::Forms::PictureBox());
-		sarpe[dimensiune]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"Snake_Body" + (1 + (sarpe == sarpe2)) + ".BackgroundImage")));
-		sarpe[dimensiune]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-		sarpe[dimensiune]->Location = sarpe[dimensiune - 1]->Location;
-		sarpe[dimensiune]->Size = System::Drawing::Size(50, 50);
-		this->Controls->Add(sarpe[dimensiune]);
-		(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(sarpe[dimensiune]))->EndInit();
+		sarpe[*dimensiune] = (gcnew System::Windows::Forms::PictureBox());
+		sarpe[*dimensiune]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+		sarpe[*dimensiune]->Location = sarpe[ordine[(*dimensiune) - 2]]->Location;
+		sarpe[*dimensiune]->Size = System::Drawing::Size(50, 50);
+		this->Controls->Add(sarpe[*dimensiune]);
+		(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(sarpe[*dimensiune]))->EndInit();
 
-		if (sarpe == sarpe1)
-		{
-			if (game_mode == 0)
-				Scor1++;
-			else
-				Scor1 += 2;
-			dimensiune_sarpe1++;
-			Ordine_Sarpe1[dimensiune_sarpe1 - 2] = dimensiune_sarpe1 - 1;
-		}
-		else if (sarpe == sarpe2)
-		{
-			if (game_mode == 0)
-				Scor2++;
-			else
-				Scor2 += 2;
-
-			dimensiune_sarpe2++;
-			Ordine_Sarpe2[dimensiune_sarpe2 - 2] = dimensiune_sarpe2 - 1;
-		}
+		ordine[(*dimensiune) - 1] = *dimensiune;
+		(*dimensiune)++;
+		(*scor) += (game_mode>0)+1;
 	}
 
 	System::Void Joc_Closing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 	{
-		End_Game();
+		if (Timer_Sarpe1->Enabled)
+		{
+			End_Game();
+		}
 	}
 
 	void End_Game()
@@ -668,9 +635,22 @@ namespace Snake {
 		Timer_Sarpe1->Enabled = false;
 		Timer_Speed_Bonus->Enabled = false;
 		Timer_Bonusuri->Enabled = false;
+		this->Visible = false;
 
 		if (game_mode>0)
 			Timer_Sarpe2->Enabled = false;
+
+		if (game_mode == 0 || game_mode == 2)
+		{
+			Gameover2 form;
+			form.ShowDialog();
+		}
+
+		if (game_mode == 1)
+		{
+			Gameover1^ form = gcnew Gameover1(1);
+			form->ShowDialog();
+		}
 	}
 };
 }

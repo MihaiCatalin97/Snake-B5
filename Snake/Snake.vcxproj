@@ -136,6 +136,21 @@
   <ItemGroup>
     <Image Include="..\..\..\..\..\Desktop\menu_button_bg.png" />
     <Image Include="..\..\..\..\..\Desktop\snake_head.png" />
+    <Image Include="..\..\..\..\Desktop\15970568_1570470116302653_2044924628_n.png" />
+    <Image Include="D:\Snake PSD\snake2curved0.png" />
+    <Image Include="D:\Snake PSD\snake2curved1.png" />
+    <Image Include="D:\Snake PSD\snake2curved2.png" />
+    <Image Include="D:\Snake PSD\snake2curved3.png" />
+    <Image Include="D:\Snake PSD\snake2head0.png" />
+    <Image Include="D:\Snake PSD\snake2head1.png" />
+    <Image Include="D:\Snake PSD\snake2head2.png" />
+    <Image Include="D:\Snake PSD\snake2head3.png" />
+    <Image Include="D:\Snake PSD\snake2straight1.png" />
+    <Image Include="D:\Snake PSD\snake2straight2.png" />
+    <Image Include="D:\Snake PSD\snake2tail0.png" />
+    <Image Include="D:\Snake PSD\snake2tail1.png" />
+    <Image Include="D:\Snake PSD\snake2tail2.png" />
+    <Image Include="D:\Snake PSD\snake2tail3.png" />
     <Image Include="Images\apple.png" />
     <Image Include="Images\bonus_speed.png" />
     <Image Include="Images\double_score.png" />
@@ -166,7 +181,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gameover1.resx">
       <DependentUpon>Gameover1.h</DependentUpon>
-      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">  $(IntDir)/ &lt;placeholder&gt; . Gameover1 .resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Gameover2.resx">
       <DependentUpon>Gameover2.h</DependentUpon>

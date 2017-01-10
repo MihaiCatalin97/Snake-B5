@@ -203,6 +203,10 @@ namespace Snake {
 
 	private: System::Void button_scor_Click(System::Object^  sender, System::EventArgs^  e) 
 	{
+		for (int i = 0; i < 100; i++)
+			 Scoruri[i].Scor = 0;
+		Numar_Scoruri = 0;
+
 		Citire_Scoruri();
 		Sortare_Scoruri();
 		Fereastra_Scor form;

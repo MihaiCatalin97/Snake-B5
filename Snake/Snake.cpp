@@ -31,7 +31,6 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLi
 	return (int)msg.wParam;
 }
 
-
 void Inserare_Scor(int x)
 {
 	ofstream g("Scor.txt", std::ios_base::app | std::ios_base::out);

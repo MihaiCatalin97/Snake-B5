@@ -105,6 +105,51 @@
     <Image Include="Images\slow.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\..\..\..\Desktop\15970568_1570470116302653_2044924628_n.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Snake PSD\snake2tail3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Snake PSD\snake2head1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Snake PSD\snake2head2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Snake PSD\snake2head3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Snake PSD\snake2curved0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Snake PSD\snake2curved2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Snake PSD\snake2tail2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Snake PSD\snake2curved1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Snake PSD\snake2straight2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Snake PSD\snake2tail1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Snake PSD\snake2head0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Snake PSD\snake2tail0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Snake PSD\snake2curved3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Snake PSD\snake2straight1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Meniu.resx">

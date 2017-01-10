@@ -55,6 +55,7 @@ namespace Snake {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Numejucatori::typeid));
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
@@ -64,9 +65,10 @@ namespace Snake {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(186, 193);
+			this->button1->Location = System::Drawing::Point(248, 238);
+			this->button1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->Size = System::Drawing::Size(100, 28);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Continue";
 			this->button1->UseVisualStyleBackColor = true;
@@ -74,16 +76,18 @@ namespace Snake {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(73, 74);
+			this->textBox1->Location = System::Drawing::Point(97, 91);
+			this->textBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(118, 20);
+			this->textBox1->Size = System::Drawing::Size(156, 22);
 			this->textBox1->TabIndex = 1;
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(72, 148);
+			this->textBox2->Location = System::Drawing::Point(96, 182);
+			this->textBox2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(119, 20);
+			this->textBox2->Size = System::Drawing::Size(157, 22);
 			this->textBox2->TabIndex = 2;
 			// 
 			// label1
@@ -92,9 +96,10 @@ namespace Snake {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::GreenYellow;
-			this->label1->Location = System::Drawing::Point(50, 107);
+			this->label1->Location = System::Drawing::Point(67, 132);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(177, 25);
+			this->label1->Size = System::Drawing::Size(219, 31);
 			this->label1->TabIndex = 3;
 			this->label1->Text = L"Nume Jucator 2";
 			// 
@@ -104,22 +109,26 @@ namespace Snake {
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label2->ForeColor = System::Drawing::Color::GreenYellow;
-			this->label2->Location = System::Drawing::Point(50, 29);
+			this->label2->Location = System::Drawing::Point(67, 36);
+			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(177, 25);
+			this->label2->Size = System::Drawing::Size(219, 31);
 			this->label2->TabIndex = 4;
 			this->label2->Text = L"Nume Jucator 1";
 			// 
 			// Numejucatori
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(284, 239);
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->ClientSize = System::Drawing::Size(379, 294);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->button1);
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"Numejucatori";
 			this->Text = L"Numejucatori";
 			this->ResumeLayout(false);
@@ -130,7 +139,11 @@ namespace Snake {
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 				 msclr::interop::marshal_context context;
 				 Nume1 = context.marshal_as<std::string>(textBox1->Text);
+				 if (textBox1->Text->Length == 0)
+					 Nume1 = "Player1";
 				 Nume2 = context.marshal_as<std::string>(textBox2->Text);
+				 if (textBox2->Text->Length == 0)
+					 Nume2 = "Player2";
 				 this->Visible = false;
 				 Fereastra_Joc^ form = gcnew Fereastra_Joc(1);
 				 form->ShowDialog();
