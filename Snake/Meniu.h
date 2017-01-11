@@ -5,6 +5,8 @@
 #include "Numejucator.h"
 #include "Numejucatori.h"
 
+
+
 namespace Snake {
 
 	using namespace System;
@@ -31,11 +33,16 @@ namespace Snake {
 			}
 		}
 	private: System::Windows::Forms::Label^  Titlu_Meniu;
-	private: System::Windows::Forms::Button^  button_singleplayer;
-	private: System::Windows::Forms::Button^  button_double_player;
-	private: System::Windows::Forms::Button^  button_vscomputer;
-	private: System::Windows::Forms::Button^  button_scor;
-		private: System::Windows::Forms::Button^  button_exit;
+	private: System::Windows::Forms::Label^  singleplayer;
+	private: System::Windows::Forms::Label^  exit;
+	private: System::Windows::Forms::Label^  doubleplayer;
+	private: System::Windows::Forms::Label^  versuscomputer;
+	private: System::Windows::Forms::Label^  scor;
+
+
+
+
+
 
 		System::ComponentModel::Container ^components;
 
@@ -43,11 +50,11 @@ namespace Snake {
 		{
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Meniu::typeid));
 			this->Titlu_Meniu = (gcnew System::Windows::Forms::Label());
-			this->button_singleplayer = (gcnew System::Windows::Forms::Button());
-			this->button_double_player = (gcnew System::Windows::Forms::Button());
-			this->button_vscomputer = (gcnew System::Windows::Forms::Button());
-			this->button_scor = (gcnew System::Windows::Forms::Button());
-			this->button_exit = (gcnew System::Windows::Forms::Button());
+			this->singleplayer = (gcnew System::Windows::Forms::Label());
+			this->exit = (gcnew System::Windows::Forms::Label());
+			this->doubleplayer = (gcnew System::Windows::Forms::Label());
+			this->versuscomputer = (gcnew System::Windows::Forms::Label());
+			this->scor = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// Titlu_Meniu
@@ -58,7 +65,7 @@ namespace Snake {
 			this->Titlu_Meniu->Font = (gcnew System::Drawing::Font(L"Komika Axis", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Titlu_Meniu->ForeColor = System::Drawing::Color::YellowGreen;
-			this->Titlu_Meniu->Location = System::Drawing::Point(68, 16);
+			this->Titlu_Meniu->Location = System::Drawing::Point(63, 28);
 			this->Titlu_Meniu->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->Titlu_Meniu->Name = L"Titlu_Meniu";
 			this->Titlu_Meniu->Size = System::Drawing::Size(182, 67);
@@ -67,108 +74,94 @@ namespace Snake {
 			this->Titlu_Meniu->Text = L"Snake!";
 			this->Titlu_Meniu->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
-			// button_singleplayer
+			// singleplayer
 			// 
-			this->button_singleplayer->BackColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->button_singleplayer->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button_singleplayer.BackgroundImage")));
-			this->button_singleplayer->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->button_singleplayer->CausesValidation = false;
-			this->button_singleplayer->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button_singleplayer->Font = (gcnew System::Drawing::Font(L"Marker Felt", 13.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->singleplayer->BackColor = System::Drawing::Color::Transparent;
+			this->singleplayer->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->singleplayer->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button_singleplayer->ForeColor = System::Drawing::Color::White;
-			this->button_singleplayer->Location = System::Drawing::Point(75, 114);
-			this->button_singleplayer->Margin = System::Windows::Forms::Padding(0);
-			this->button_singleplayer->Name = L"button_singleplayer";
-			this->button_singleplayer->Size = System::Drawing::Size(150, 41);
-			this->button_singleplayer->TabIndex = 1;
-			this->button_singleplayer->Text = L"Single Player";
-			this->button_singleplayer->UseVisualStyleBackColor = false;
-			this->button_singleplayer->Click += gcnew System::EventHandler(this, &Meniu::button_singleplayer_Click);
+			this->singleplayer->ForeColor = System::Drawing::Color::WhiteSmoke;
+			this->singleplayer->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"singleplayer.Image")));
+			this->singleplayer->Location = System::Drawing::Point(83, 127);
+			this->singleplayer->Name = L"singleplayer";
+			this->singleplayer->Size = System::Drawing::Size(151, 41);
+			this->singleplayer->TabIndex = 5;
+			this->singleplayer->Text = L"Single Player";
+			this->singleplayer->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->singleplayer->Click += gcnew System::EventHandler(this, &Meniu::singleplayer_Click);
 			// 
-			// button_double_player
+			// exit
 			// 
-			this->button_double_player->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button_double_player.BackgroundImage")));
-			this->button_double_player->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->button_double_player->CausesValidation = false;
-			this->button_double_player->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button_double_player->Font = (gcnew System::Drawing::Font(L"Marker Felt", 13.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->exit->BackColor = System::Drawing::Color::Transparent;
+			this->exit->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button_double_player->ForeColor = System::Drawing::Color::White;
-			this->button_double_player->Location = System::Drawing::Point(75, 171);
-			this->button_double_player->Margin = System::Windows::Forms::Padding(2);
-			this->button_double_player->Name = L"button_double_player";
-			this->button_double_player->Size = System::Drawing::Size(150, 41);
-			this->button_double_player->TabIndex = 2;
-			this->button_double_player->Text = L"Double Player";
-			this->button_double_player->UseVisualStyleBackColor = true;
-			this->button_double_player->Click += gcnew System::EventHandler(this, &Meniu::button_double_player_Click);
+			this->exit->ForeColor = System::Drawing::Color::WhiteSmoke;
+			this->exit->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"exit.Image")));
+			this->exit->Location = System::Drawing::Point(82, 359);
+			this->exit->Name = L"exit";
+			this->exit->Size = System::Drawing::Size(151, 41);
+			this->exit->TabIndex = 6;
+			this->exit->Text = L"Exit";
+			this->exit->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->exit->Click += gcnew System::EventHandler(this, &Meniu::exit_Click);
 			// 
-			// button_vscomputer
+			// doubleplayer
 			// 
-			this->button_vscomputer->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button_vscomputer.BackgroundImage")));
-			this->button_vscomputer->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->button_vscomputer->CausesValidation = false;
-			this->button_vscomputer->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button_vscomputer->Font = (gcnew System::Drawing::Font(L"Marker Felt", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->doubleplayer->BackColor = System::Drawing::Color::Transparent;
+			this->doubleplayer->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button_vscomputer->ForeColor = System::Drawing::Color::White;
-			this->button_vscomputer->Location = System::Drawing::Point(75, 228);
-			this->button_vscomputer->Margin = System::Windows::Forms::Padding(2);
-			this->button_vscomputer->Name = L"button_vscomputer";
-			this->button_vscomputer->Size = System::Drawing::Size(150, 41);
-			this->button_vscomputer->TabIndex = 2;
-			this->button_vscomputer->Text = L"Versus Computer";
-			this->button_vscomputer->UseVisualStyleBackColor = true;
-			this->button_vscomputer->Click += gcnew System::EventHandler(this, &Meniu::button_vscomputer_Click);
+			this->doubleplayer->ForeColor = System::Drawing::Color::WhiteSmoke;
+			this->doubleplayer->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"doubleplayer.Image")));
+			this->doubleplayer->Location = System::Drawing::Point(83, 185);
+			this->doubleplayer->Name = L"doubleplayer";
+			this->doubleplayer->Size = System::Drawing::Size(151, 41);
+			this->doubleplayer->TabIndex = 7;
+			this->doubleplayer->Text = L"Double Player";
+			this->doubleplayer->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->doubleplayer->Click += gcnew System::EventHandler(this, &Meniu::doubleplayer_Click);
 			// 
-			// button_scor
+			// versuscomputer
 			// 
-			this->button_scor->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button_scor.BackgroundImage")));
-			this->button_scor->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->button_scor->CausesValidation = false;
-			this->button_scor->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button_scor->Font = (gcnew System::Drawing::Font(L"Marker Felt", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->versuscomputer->BackColor = System::Drawing::Color::Transparent;
+			this->versuscomputer->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button_scor->ForeColor = System::Drawing::Color::White;
-			this->button_scor->Location = System::Drawing::Point(75, 284);
-			this->button_scor->Margin = System::Windows::Forms::Padding(2);
-			this->button_scor->Name = L"button_scor";
-			this->button_scor->Size = System::Drawing::Size(150, 41);
-			this->button_scor->TabIndex = 3;
-			this->button_scor->Text = L"Scor";
-			this->button_scor->UseVisualStyleBackColor = true;
-			this->button_scor->Click += gcnew System::EventHandler(this, &Meniu::button_scor_Click);
+			this->versuscomputer->ForeColor = System::Drawing::Color::WhiteSmoke;
+			this->versuscomputer->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"versuscomputer.Image")));
+			this->versuscomputer->Location = System::Drawing::Point(83, 245);
+			this->versuscomputer->Name = L"versuscomputer";
+			this->versuscomputer->Size = System::Drawing::Size(151, 41);
+			this->versuscomputer->TabIndex = 8;
+			this->versuscomputer->Text = L"Versus Computer";
+			this->versuscomputer->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->versuscomputer->Click += gcnew System::EventHandler(this, &Meniu::versuscomputer_Click);
 			// 
-			// button_exit
+			// scor
 			// 
-			this->button_exit->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button_exit.BackgroundImage")));
-			this->button_exit->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->button_exit->CausesValidation = false;
-			this->button_exit->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button_exit->Font = (gcnew System::Drawing::Font(L"Marker Felt", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->scor->BackColor = System::Drawing::Color::Transparent;
+			this->scor->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button_exit->ForeColor = System::Drawing::Color::White;
-			this->button_exit->Location = System::Drawing::Point(75, 341);
-			this->button_exit->Margin = System::Windows::Forms::Padding(2);
-			this->button_exit->Name = L"button_exit";
-			this->button_exit->Size = System::Drawing::Size(150, 41);
-			this->button_exit->TabIndex = 4;
-			this->button_exit->Text = L"Exit";
-			this->button_exit->UseVisualStyleBackColor = true;
-			this->button_exit->Click += gcnew System::EventHandler(this, &Meniu::button_exit_Click);
+			this->scor->ForeColor = System::Drawing::Color::WhiteSmoke;
+			this->scor->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"scor.Image")));
+			this->scor->Location = System::Drawing::Point(82, 301);
+			this->scor->Name = L"scor";
+			this->scor->Size = System::Drawing::Size(151, 41);
+			this->scor->TabIndex = 9;
+			this->scor->Text = L"Scor";
+			this->scor->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->scor->Click += gcnew System::EventHandler(this, &Meniu::scor_Click);
 			// 
 			// Meniu
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::SystemColors::ControlDarkDark;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(300, 447);
-			this->Controls->Add(this->button_exit);
-			this->Controls->Add(this->button_scor);
-			this->Controls->Add(this->button_double_player);
-			this->Controls->Add(this->button_vscomputer);
-			this->Controls->Add(this->button_singleplayer);
+			this->Controls->Add(this->scor);
+			this->Controls->Add(this->versuscomputer);
+			this->Controls->Add(this->doubleplayer);
+			this->Controls->Add(this->exit);
+			this->Controls->Add(this->singleplayer);
 			this->Controls->Add(this->Titlu_Meniu);
 			this->ForeColor = System::Drawing::Color::Gold;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -184,44 +177,40 @@ namespace Snake {
 
 		}
 #pragma endregion
-	private: System::Void button_singleplayer_Click(System::Object^  sender, System::EventArgs^  e)
-	{
-				 Numejucator^ form = gcnew Numejucator(0);
-				 form->ShowDialog();
-	}
-
-	private: System::Void button_double_player_Click(System::Object^  sender, System::EventArgs^  e) 
-	{
-				 Numejucatori^ form = gcnew Numejucatori();
-				 form->ShowDialog();
-	}
-
-	private: System::Void button_vscomputer_Click(System::Object^  sender, System::EventArgs^  e) {
-				 Numejucator^ form = gcnew Numejucator(2);
-				 form->ShowDialog();
-	}
-
-	private: System::Void button_scor_Click(System::Object^  sender, System::EventArgs^  e) 
-	{
-		for (int i = 0; i < 100; i++)
-			 Scoruri[i].Scor = 0;
-		Numar_Scoruri = 0;
-
-		Citire_Scoruri();
-		Sortare_Scoruri();
-		Fereastra_Scor form;
-		form.ShowDialog();
-	}
-	private: System::Void button_exit_Click(System::Object^  sender, System::EventArgs^  e) 
-	{
-		Application::Exit();
-	}
 
 	System::Void Meniu_Closing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 	{
 		Application::Exit();
 	}
 private: System::Void Meniu_Load(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void singleplayer_Click(System::Object^  sender, System::EventArgs^  e) {
+			 Numejucator^ form = gcnew Numejucator(0);
+			 form->ShowDialog();
+}
+private: System::Void doubleplayer_Click(System::Object^  sender, System::EventArgs^  e) {
+			 Numejucatori form;
+			 form.ShowDialog();
+
+}
+private: System::Void versuscomputer_Click(System::Object^  sender, System::EventArgs^  e) {
+			 Numejucator^ form = gcnew Numejucator(2);
+			 form->ShowDialog();
+
+}
+private: System::Void exit_Click(System::Object^  sender, System::EventArgs^  e) {
+			 Application::Exit();
+}
+private: System::Void scor_Click(System::Object^  sender, System::EventArgs^  e) {
+			 for (int i = 0; i < 100; i++)
+				 Scoruri[i].Scor = 0;
+			 Numar_Scoruri = 0;
+
+			 Citire_Scoruri();
+			 Sortare_Scoruri();
+			 Fereastra_Scor form;
+			 form.ShowDialog();
+
 }
 };
 }

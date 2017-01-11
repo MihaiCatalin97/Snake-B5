@@ -342,37 +342,43 @@ namespace Snake {
 
 		void InitializeComponent(void)
 			{
-				this->label_Nume = (gcnew System::Windows::Forms::Label());
-				this->label_Scor = (gcnew System::Windows::Forms::Label());
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Fereastra_Joc::typeid));
+			this->label_Nume = (gcnew System::Windows::Forms::Label());
+			this->label_Scor = (gcnew System::Windows::Forms::Label());
+			this->SuspendLayout();
+			// 
+			// label_Nume
+			// 
+			this->label_Nume->BackColor = System::Drawing::Color::Transparent;
+			this->label_Nume->Location = System::Drawing::Point(25, 25);
+			this->label_Nume->Name = L"label_Nume";
+			this->label_Nume->Size = System::Drawing::Size(400, 25);
+			this->label_Nume->TabIndex = 9;
+			// 
+			// label_Scor
+			// 
+			this->label_Scor->BackColor = System::Drawing::Color::Transparent;
+			this->label_Scor->Location = System::Drawing::Point(400, 25);
+			this->label_Scor->Name = L"label_Scor";
+			this->label_Scor->Size = System::Drawing::Size(100, 25);
+			this->label_Scor->TabIndex = 10;
+			this->label_Scor->Text = L"Scor: 0";
+			// 
+			// Fereastra_Joc
+			// 
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->ClientSize = System::Drawing::Size(500, 575);
+			this->Controls->Add(this->label_Scor);
+			this->Controls->Add(this->label_Nume);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->MaximizeBox = false;
+			this->Name = L"Fereastra_Joc";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"Fereastra_Joc";
+			this->ResumeLayout(false);
 
-				this->SuspendLayout();
-				// 
-				// label_Nume
-				// 
-				this->label_Nume->Location = System::Drawing::Point(25, 25);
-				this->label_Nume->Name = L"label_Nume";
-				this->label_Nume->Size = System::Drawing::Size(400, 25);
-				this->label_Nume->TabIndex = 9;
-
-
-				this->label_Scor->Location = System::Drawing::Point(400, 25);
-				this->label_Scor->Name = L"label_Scor";
-				this->label_Scor->Size = System::Drawing::Size(100, 25);
-				this->label_Scor->TabIndex = 10;
-				this->label_Scor->Text = L"Scor: 0";
-
-				this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
-				this->ClientSize = System::Drawing::Size(500, 575);
-				this->Controls->Add(this->label_Scor);
-				this->Controls->Add(this->label_Nume);
-				this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-				this->MaximizeBox = false;
-				this->Name = L"Fereastra_Joc";
-				this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-				this->Text = L"Fereastra_Joc";
-
-				this->ResumeLayout(false);
-			}
+		}
 
 		void Refresh_Score()
 			{
