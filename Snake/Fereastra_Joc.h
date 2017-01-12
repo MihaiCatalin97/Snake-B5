@@ -34,7 +34,10 @@ namespace Snake {
 
 		System::Windows::Forms::Label^  label_Nume;
 		System::Windows::Forms::Label^  label_Scor;
-		System::ComponentModel::Container ^components;
+
+
+
+			 System::ComponentModel::Container ^components;
 
 		void Consume_Bonus(int x, array<PictureBox^>^ sarpe)
 		{
@@ -222,31 +225,25 @@ namespace Snake {
 
 			Mancare = (gcnew System::Windows::Forms::PictureBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(Mancare))->BeginInit();
-			Mancare->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"apple")));
-			Mancare->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+			Mancare->BackColor = System::Drawing::Color::Transparent;
+			Mancare->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"apple")));
 			Mancare->Size = System::Drawing::Size(50, 50);
+			Mancare->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(Mancare))->EndInit();
 
 			for (int i = 0; i < bonusuri->Length; i++)
 			{
 				bonusuri[i] = (gcnew System::Windows::Forms::PictureBox());
 				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(bonusuri[i]))->BeginInit();
-				bonusuri[i]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+				bonusuri[i]->BackColor = System::Drawing::Color::Transparent;
 				bonusuri[i]->Size = System::Drawing::Size(50, 50);
 				bonusuri[i]->Visible = false;
+			    bonusuri[i]->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+				bonusuri[i]->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"bonus" + i)));
+				bonusuri_plasate[i] = 0;
 				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(bonusuri[i]))->EndInit();
 				this->Controls->Add(bonusuri[i]);
 			}
-
-			bonusuri[0]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"double_score")));
-			bonusuri[1]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"bonus_speed")));
-			bonusuri[2]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"slow")));
-			bonusuri[3]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"half_Score")));
-
-			bonusuri_plasate[0] = 0;
-			bonusuri_plasate[1] = 0;
-			bonusuri_plasate[2] = 0;
-			bonusuri_plasate[3] = 0;
 
 			this->Controls->Add(Mancare);
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &Fereastra_Joc::Joc_Closing);
@@ -264,12 +261,15 @@ namespace Snake {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(sarpe[0]))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(sarpe[1]))->BeginInit();
 
-			sarpe[0]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (sarpe==sarpe2)) + "head3")));
-			sarpe[0]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+
+			sarpe[0]->BackColor = System::Drawing::Color::Transparent;
+			sarpe[0]->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (sarpe == sarpe2)) + "head3")));
+			sarpe[0]->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			sarpe[0]->Size = System::Drawing::Size(50, 50);
 
-			sarpe[1]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (sarpe==sarpe2)) + "tail1")));
-			sarpe[1]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			sarpe[1]->BackColor = System::Drawing::Color::Transparent;
+			sarpe[1]->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (sarpe == sarpe2)) + "tail1")));
+			sarpe[1]->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			sarpe[1]->Size = System::Drawing::Size(50, 50);
 
 			if (sarpe == sarpe1)
@@ -350,17 +350,21 @@ namespace Snake {
 			// label_Nume
 			// 
 			this->label_Nume->BackColor = System::Drawing::Color::Transparent;
-			this->label_Nume->Location = System::Drawing::Point(25, 25);
+			this->label_Nume->Font = (gcnew System::Drawing::Font(L"Berlin Sans FB Demi", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label_Nume->Location = System::Drawing::Point(25, 21);
 			this->label_Nume->Name = L"label_Nume";
-			this->label_Nume->Size = System::Drawing::Size(400, 25);
+			this->label_Nume->Size = System::Drawing::Size(400, 38);
 			this->label_Nume->TabIndex = 9;
 			// 
 			// label_Scor
 			// 
 			this->label_Scor->BackColor = System::Drawing::Color::Transparent;
-			this->label_Scor->Location = System::Drawing::Point(400, 25);
+			this->label_Scor->Font = (gcnew System::Drawing::Font(L"Berlin Sans FB Demi", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label_Scor->Location = System::Drawing::Point(400, 21);
 			this->label_Scor->Name = L"label_Scor";
-			this->label_Scor->Size = System::Drawing::Size(100, 25);
+			this->label_Scor->Size = System::Drawing::Size(100, 38);
 			this->label_Scor->TabIndex = 10;
 			this->label_Scor->Text = L"Scor: 0";
 			// 
@@ -483,17 +487,17 @@ namespace Snake {
 					if (*dimensiune > 2)
 					{
 						if (Next_Location.X == Locatie_Precedent_Cap.X)
-							bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe==sarpe2)) + "straight2")));
+							bucati_sarpe[ordine[0]]->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe==sarpe2)) + "straight2")));
 						else if (Next_Location.Y == Locatie_Precedent_Cap.Y)
-							bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "straight1")));
+							bucati_sarpe[ordine[0]]->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "straight1")));
 						else if ((ultima_directie == 0 && directie == 3) || (ultima_directie == 1 && directie == 2))
-							bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "curved2")));
+							bucati_sarpe[ordine[0]]->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "curved2")));
 						else if ((ultima_directie == 0 && directie == 1) || (ultima_directie == 3 && directie == 2))
-							bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "curved1")));
+							bucati_sarpe[ordine[0]]->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "curved1")));
 						else if ((ultima_directie == 2 && directie == 1) || (ultima_directie == 3 && directie == 0))
-							bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "curved0")));
+							bucati_sarpe[ordine[0]]->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "curved0")));
 						else if ((ultima_directie == 1 && directie == 0) || (ultima_directie == 2 && directie == 3))
-							bucati_sarpe[ordine[0]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "curved3")));
+							bucati_sarpe[ordine[0]]->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "curved3")));
 
 					}
 
@@ -508,19 +512,19 @@ namespace Snake {
 					if (Locatie_Coada.X == Locatie_Segment_Precedent.X)
 					{
 						if ((Locatie_Coada.Y < Locatie_Segment_Precedent.Y || (Locatie_Coada.Y == 525 && Locatie_Segment_Precedent.Y == 75)) && !(Locatie_Coada.Y == 75 && Locatie_Segment_Precedent.Y == 525))
-							bucati_sarpe[ordine[*dimensiune - 2]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "tail1")));
+							bucati_sarpe[ordine[*dimensiune - 2]]->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "tail1")));
 						else
-							bucati_sarpe[ordine[*dimensiune - 2]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "tail3")));
+							bucati_sarpe[ordine[*dimensiune - 2]]->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "tail3")));
 					}
 					else
 					{
 						if ((Locatie_Coada.X < Locatie_Segment_Precedent.X || (Locatie_Coada.X == 450 && Locatie_Segment_Precedent.X == 0)) && !(Locatie_Coada.X == 0 && Locatie_Segment_Precedent.X == 450))
-							bucati_sarpe[ordine[*dimensiune - 2]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "tail0")));
+							bucati_sarpe[ordine[*dimensiune - 2]]->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "tail0")));
 						else
-							bucati_sarpe[ordine[*dimensiune - 2]]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "tail2")));
+							bucati_sarpe[ordine[*dimensiune - 2]]->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "tail2")));
 					}
 
-					bucati_sarpe[0]->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "head" + directie)));
+					bucati_sarpe[0]->Image = (cli::safe_cast<System::Drawing::Image^>(resourcesx->GetObject(L"snake" + (1 + (bucati_sarpe == sarpe2)) + "head" + directie)));
 				}
 			}
 
@@ -612,9 +616,10 @@ namespace Snake {
 	{
 		//creare segment nou sarpe
 		sarpe[*dimensiune] = (gcnew System::Windows::Forms::PictureBox());
-		sarpe[*dimensiune]->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+		sarpe[*dimensiune]->BackColor = System::Drawing::Color::Transparent;
 		sarpe[*dimensiune]->Location = sarpe[ordine[(*dimensiune) - 2]]->Location;
 		sarpe[*dimensiune]->Size = System::Drawing::Size(50, 50);
+		sarpe[*dimensiune]->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 		this->Controls->Add(sarpe[*dimensiune]);
 		(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(sarpe[*dimensiune]))->EndInit();
 

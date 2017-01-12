@@ -71,7 +71,7 @@ namespace Snake {
 			this->Controls->Add(this->Titlu_Meniu);
 			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->MaximizeBox = false;
 			this->Name = L"Fereastra_Scor";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -86,7 +86,7 @@ namespace Snake {
 			this->Label_Scoruri[nr]->AutoSize = true;
 			this->Label_Scoruri[nr]->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Label_Scoruri[nr]->ForeColor = System::Drawing::Color::Black;
+			this->Label_Scoruri[nr]->ForeColor = System::Drawing::Color::MidnightBlue;
 			this->Label_Scoruri[nr]->Location = System::Drawing::Point(225, 85 + 25*nr);
 			this->Label_Scoruri[nr]->Size = System::Drawing::Size(50, 20);
 			this->Label_Scoruri[nr]->BackColor = System::Drawing::Color::Transparent;
@@ -101,7 +101,7 @@ namespace Snake {
 			this->Label_Nume[nr]->AutoSize = true;
 			this->Label_Nume[nr]->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Label_Nume[nr]->ForeColor = System::Drawing::Color::Black;
+			this->Label_Nume[nr]->ForeColor = System::Drawing::Color::MidnightBlue;
 			this->Label_Nume[nr]->Location = System::Drawing::Point(25, 85 + 25 * nr);
 			this->Label_Nume[nr]->Size = System::Drawing::Size(50, 20);
 			this->Label_Nume[nr]->BackColor = System::Drawing::Color::Transparent;

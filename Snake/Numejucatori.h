@@ -85,7 +85,7 @@ namespace Snake {
 			this->label1->BackColor = System::Drawing::Color::Transparent;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Poor Richard", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::Color::Black;
+			this->label1->ForeColor = System::Drawing::Color::MidnightBlue;
 			this->label1->Location = System::Drawing::Point(38, 98);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(189, 34);
@@ -98,7 +98,7 @@ namespace Snake {
 			this->label2->BackColor = System::Drawing::Color::Transparent;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Poor Richard", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->ForeColor = System::Drawing::Color::Black;
+			this->label2->ForeColor = System::Drawing::Color::MidnightBlue;
 			this->label2->Location = System::Drawing::Point(38, 21);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(189, 38);

@@ -93,7 +93,7 @@ namespace Snake {
 			this->Titlu_Meniu->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->Titlu_Meniu->Font = (gcnew System::Drawing::Font(L"Imprint MT Shadow", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Titlu_Meniu->ForeColor = System::Drawing::Color::Black;
+			this->Titlu_Meniu->ForeColor = System::Drawing::Color::Indigo;
 			this->Titlu_Meniu->Location = System::Drawing::Point(33, 30);
 			this->Titlu_Meniu->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->Titlu_Meniu->Name = L"Titlu_Meniu";
@@ -106,10 +106,10 @@ namespace Snake {
 			// 
 			this->label1->BackColor = System::Drawing::Color::Transparent;
 			this->label1->Cursor = System::Windows::Forms::Cursors::IBeam;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"Harlow Solid Italic", 14.25F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->label1->Location = System::Drawing::Point(204, 136);
+			this->label1->ForeColor = System::Drawing::Color::MidnightBlue;
+			this->label1->Location = System::Drawing::Point(200, 136);
 			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(129, 53);
@@ -121,10 +121,10 @@ namespace Snake {
 			// 
 			this->label2->BackColor = System::Drawing::Color::Transparent;
 			this->label2->Cursor = System::Windows::Forms::Cursors::IBeam;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label2->Font = (gcnew System::Drawing::Font(L"Harlow Solid Italic", 14.25F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->ForeColor = System::Drawing::Color::Black;
-			this->label2->Location = System::Drawing::Point(-9, 136);
+			this->label2->ForeColor = System::Drawing::Color::MidnightBlue;
+			this->label2->Location = System::Drawing::Point(3, 136);
 			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(129, 53);
@@ -137,10 +137,10 @@ namespace Snake {
 			// 
 			this->label3->BackColor = System::Drawing::Color::Transparent;
 			this->label3->Cursor = System::Windows::Forms::Cursors::IBeam;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label3->Font = (gcnew System::Drawing::Font(L"Harlow Solid Italic", 14.25F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label3->ForeColor = System::Drawing::Color::Black;
-			this->label3->Location = System::Drawing::Point(-18, 189);
+			this->label3->ForeColor = System::Drawing::Color::MidnightBlue;
+			this->label3->Location = System::Drawing::Point(-9, 189);
 			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(150, 53);
@@ -153,10 +153,10 @@ namespace Snake {
 			// 
 			this->label4->BackColor = System::Drawing::Color::Transparent;
 			this->label4->Cursor = System::Windows::Forms::Cursors::IBeam;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label4->Font = (gcnew System::Drawing::Font(L"Harlow Solid Italic", 14.25F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label4->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->label4->Location = System::Drawing::Point(187, 189);
+			this->label4->ForeColor = System::Drawing::Color::MidnightBlue;
+			this->label4->Location = System::Drawing::Point(182, 189);
 			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(165, 53);
@@ -167,16 +167,15 @@ namespace Snake {
 			// 
 			// label5
 			// 
-			this->label5->AutoSize = true;
 			this->label5->BackColor = System::Drawing::Color::Transparent;
 			this->label5->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label5->ForeColor = System::Drawing::Color::DimGray;
-			this->label5->Location = System::Drawing::Point(106, 83);
+			this->label5->Location = System::Drawing::Point(53, 83);
 			this->label5->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(92, 24);
+			this->label5->Size = System::Drawing::Size(242, 41);
 			this->label5->TabIndex = 6;
 			this->label5->Text = L"situatiejoc";
 			this->label5->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -187,7 +186,7 @@ namespace Snake {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(326, 271);
+			this->ClientSize = System::Drawing::Size(335, 281);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label3);
@@ -197,7 +196,6 @@ namespace Snake {
 			this->Name = L"Gameover1";
 			this->Text = L"Gameover1";
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion
