@@ -250,6 +250,11 @@ namespace Snake {
 
 			Refresh_Score();
 			plaseaza_Mancare();
+			if (game_mode > 0)
+			{
+				this->label_Nume->Location = System::Drawing::Point(25, 10);
+				this->label_Scor->Location = System::Drawing::Point(400, 10);
+			}
 		}
 
 		void Creare_Sarpe(array<PictureBox^>^ sarpe)
@@ -350,23 +355,26 @@ namespace Snake {
 			// label_Nume
 			// 
 			this->label_Nume->BackColor = System::Drawing::Color::Transparent;
-			this->label_Nume->Font = (gcnew System::Drawing::Font(L"Berlin Sans FB Demi", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label_Nume->Font = (gcnew System::Drawing::Font(L"Komika Axis", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label_Nume->Location = System::Drawing::Point(25, 21);
+			this->label_Nume->Location = System::Drawing::Point(25, 20);
 			this->label_Nume->Name = L"label_Nume";
-			this->label_Nume->Size = System::Drawing::Size(400, 38);
+			this->label_Nume->Size = System::Drawing::Size(400, 55);
 			this->label_Nume->TabIndex = 9;
+			this->label_Nume->ForeColor = System::Drawing:: Color:: MintCream;
 			// 
 			// label_Scor
 			// 
 			this->label_Scor->BackColor = System::Drawing::Color::Transparent;
-			this->label_Scor->Font = (gcnew System::Drawing::Font(L"Berlin Sans FB Demi", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label_Scor->Font = (gcnew System::Drawing::Font(L"Komika Axis", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label_Scor->Location = System::Drawing::Point(400, 21);
+			this->label_Scor->Location = System::Drawing::Point(400, 20);
 			this->label_Scor->Name = L"label_Scor";
-			this->label_Scor->Size = System::Drawing::Size(100, 38);
+			this->label_Scor->Size = System::Drawing::Size(100, 55);
 			this->label_Scor->TabIndex = 10;
 			this->label_Scor->Text = L"Scor: 0";
+			this->label_Scor->ForeColor = System::Drawing::Color::MintCream;
+
 			// 
 			// Fereastra_Joc
 			// 

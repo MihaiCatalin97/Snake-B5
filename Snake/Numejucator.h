@@ -65,21 +65,23 @@ namespace Snake {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(80, 75);
+			this->textBox1->Location = System::Drawing::Point(107, 92);
+			this->textBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(124, 20);
+			this->textBox1->Size = System::Drawing::Size(164, 22);
 			this->textBox1->TabIndex = 1;
 			this->textBox1->TextChanged += gcnew System::EventHandler(this, &Numejucator::textBox1_TextChanged);
 			// 
 			// label1
 			// 
 			this->label1->BackColor = System::Drawing::Color::Transparent;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Poor Richard", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"Marker Felt", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::MidnightBlue;
-			this->label1->Location = System::Drawing::Point(64, 33);
+			this->label1->Location = System::Drawing::Point(91, 40);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(169, 39);
+			this->label1->Size = System::Drawing::Size(225, 48);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Nume Jucator";
 			// 
@@ -91,9 +93,10 @@ namespace Snake {
 			this->next->ForeColor = System::Drawing::Color::Black;
 			this->next->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"next.Image")));
 			this->next->ImageAlign = System::Drawing::ContentAlignment::BottomCenter;
-			this->next->Location = System::Drawing::Point(141, 114);
+			this->next->Location = System::Drawing::Point(188, 140);
+			this->next->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->next->Name = L"next";
-			this->next->Size = System::Drawing::Size(141, 54);
+			this->next->Size = System::Drawing::Size(188, 66);
 			this->next->TabIndex = 6;
 			this->next->Text = L"Continua";
 			this->next->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -101,14 +104,15 @@ namespace Snake {
 			// 
 			// Numejucator
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(284, 177);
+			this->ClientSize = System::Drawing::Size(379, 218);
 			this->Controls->Add(this->next);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox1);
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"Numejucator";
 			this->Text = L"Numejucator";
 			this->ResumeLayout(false);

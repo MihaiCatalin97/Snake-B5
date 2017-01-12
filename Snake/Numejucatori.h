@@ -68,27 +68,30 @@ namespace Snake {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(72, 62);
+			this->textBox1->Location = System::Drawing::Point(96, 76);
+			this->textBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(118, 20);
+			this->textBox1->Size = System::Drawing::Size(156, 22);
 			this->textBox1->TabIndex = 1;
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(71, 135);
+			this->textBox2->Location = System::Drawing::Point(96, 166);
+			this->textBox2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(119, 20);
+			this->textBox2->Size = System::Drawing::Size(157, 22);
 			this->textBox2->TabIndex = 2;
 			// 
 			// label1
 			// 
 			this->label1->BackColor = System::Drawing::Color::Transparent;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Poor Richard", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"Marker Felt", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::MidnightBlue;
-			this->label1->Location = System::Drawing::Point(38, 98);
+			this->label1->Location = System::Drawing::Point(51, 121);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(189, 34);
+			this->label1->Size = System::Drawing::Size(252, 42);
 			this->label1->TabIndex = 3;
 			this->label1->Text = L"Nume Jucator 2";
 			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -96,12 +99,13 @@ namespace Snake {
 			// label2
 			// 
 			this->label2->BackColor = System::Drawing::Color::Transparent;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Poor Richard", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label2->Font = (gcnew System::Drawing::Font(L"Marker Felt", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label2->ForeColor = System::Drawing::Color::MidnightBlue;
-			this->label2->Location = System::Drawing::Point(38, 21);
+			this->label2->Location = System::Drawing::Point(51, 26);
+			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(189, 38);
+			this->label2->Size = System::Drawing::Size(252, 47);
 			this->label2->TabIndex = 4;
 			this->label2->Text = L"Nume Jucator 1";
 			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -114,9 +118,10 @@ namespace Snake {
 			this->next->ForeColor = System::Drawing::Color::Black;
 			this->next->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"next.Image")));
 			this->next->ImageAlign = System::Drawing::ContentAlignment::BottomCenter;
-			this->next->Location = System::Drawing::Point(131, 167);
+			this->next->Location = System::Drawing::Point(175, 206);
+			this->next->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->next->Name = L"next";
-			this->next->Size = System::Drawing::Size(141, 54);
+			this->next->Size = System::Drawing::Size(188, 66);
 			this->next->TabIndex = 5;
 			this->next->Text = L"Continua";
 			this->next->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -124,16 +129,17 @@ namespace Snake {
 			// 
 			// Numejucatori
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(284, 239);
+			this->ClientSize = System::Drawing::Size(379, 294);
 			this->Controls->Add(this->next);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"Numejucatori";
 			this->Text = L"Numejucatori";
 			this->ResumeLayout(false);
